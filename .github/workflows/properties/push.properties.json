@@ -1,0 +1,8 @@
+{
+  "name": "push",
+  "description": "Build and run ReadEase React Native Package.",
+  "iconName": "push",
+  "categories": [
+    "Continuous integration"
+  ]
+}
