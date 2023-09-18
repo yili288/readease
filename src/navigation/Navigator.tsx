@@ -3,7 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from '../screens/Home';
 
 const Stack = createNativeStackNavigator();
-
+// this is a component
 export const Navigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Root">
