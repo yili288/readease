@@ -10,6 +10,7 @@ var styles = StyleSheet.create({
 })
 Sound.setCategory('Playback');
 
+// fetch audio file
 var audio = new Sound('hello.wav', RNFS.DocumentDirectoryPath, (error) => {
   if (error) {
     console.log('failed to load the sound', error.message);
@@ -19,15 +20,21 @@ var audio = new Sound('hello.wav', RNFS.DocumentDirectoryPath, (error) => {
 });
 
 export const AudioPlayer = () => {
-  const [play, setPlay] = useState(false);
+  // local variable within this component
+  const [play, setPlay] = useState(false);  //initialised to false
   
+  // Anything written inside useEffect will only run once
+  // at the initial rendering stage
   useEffect(() => {
     audio.setVolume(10);
   })
+
   return (
     <Button
       title={
-        (play) ? 'Pause' : 'Play'
+        // ternary operator
+        // condition ? if true : if false
+        (play) ? 'Pause' : 'Play'   
       }
       onPress={() => {
         (play) ? audio.stop() : audio.play();
