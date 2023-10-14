@@ -5,7 +5,7 @@ const textToSpeech = async (text) => {
     const content = {text: text};
     try{
         const response = await axios.post('http://localhost:3000/texts/text-to-speech', content)
-        console.log(response.data)
+        console.log('Text to speech success')
         return response.data
 
     }
