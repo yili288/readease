@@ -19,7 +19,7 @@ const Home = (): JSX.Element => {
     <View> 
       <Text>Hello World!</Text>
       <Button
-        title='Save audio'
+        title='Get audio'
         onPress={textToAudio}
       />
       <AudioPlayer/>
