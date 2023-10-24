@@ -46,9 +46,37 @@ const AudioScreen = (): JSX.Element => {
               style={styles.buttonStyle}
             />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity
+            onPress={() => {
+              if (sliderValue >= 5) {
+                setSliderValue(sliderValue - 5)
+              } else {
+                setSliderValue(0) 
+              }
+            }}>
             <Image
               source={require('../assets/gobackward.png')}
+              style={styles.buttonStyle}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => {}}>
+            <Image
+              source={require('../assets/play.jpg')}
+              style={styles.playerButtonStyle}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setSliderValue(sliderValue + 5)
+            }}>
+            <Image
+              source={require('../assets/goforward.png')}
+              style={styles.buttonStyle}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => {}}>
+            <Image
+              source={require('../assets/fasttrack.png')}
               style={styles.buttonStyle}
             />
           </TouchableOpacity>
@@ -79,17 +107,18 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   audioControllerContainer: {
-    marginTop:30,
+    marginTop: 30,
     flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   buttonStyle: {
-    width: 22,
-    height: 22,
+    width: 25,
+    height: 25,
   },
-  playerButtonStyle:{
-    width: 15,
-    height: 15,
-
+  playerButtonStyle: {
+    width: 70,
+    height: 70,
   },
   audioTitleStyle: {
     color: '#FFF',
