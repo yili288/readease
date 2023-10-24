@@ -7,24 +7,23 @@ const AudioScreen = (): JSX.Element => {
   const playerImageURL =
     'https://s3-alpha-sig.figma.com/img/50dc/8a30/5e43c25c1cefdfb51be8639c30d04b57?Expires=1699228800&Signature=SpBEk3Xt0lHZkppm21uyJK~2V1pu2m4EBkw251xpCmkSaFIVtEYyQCRxJysuBDoTn00htErWfTzj5FPAan3wn2cdY4MsFMSJk0EdZW8GXunVjuW~icCloGP6NSHheReOL0dLKKy0bXireuXyQbF~sFrRNmdlrLVUhAS6YWCVm9372cL~XbMwihiXVRgTane8dCH~yqSiKJhEvHDZGOaNd3xpmHjpruNlkPAa3Uy26YLwpv-R9rc5OWFb27jSdlaRsmPa0msAylLtYZqME6prIcM-tEb-ckjL-404IIr~h6X-MtqZha2x~ZLssZbyKNPvYCsclqJiNQenkfYYKDY4dg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4'
   const playerText = 'Neoclassicism And Early Romanticism In Britain'
-  const audioLength = 100
+  const audioLength = 1000
 
   const [sliderValue, setSliderValue] = useState(0)
   const handleSliderChange = (value: number) => {
     setSliderValue(value)
   }
 
-  const playbackSpeeds = [0.5, 1, 1.5, 2];
-  const maxSpeedIndex = playbackSpeeds.length - 1;
-  const [playbackSpeed, setPlaybackSpeed] = useState(playbackSpeeds[1]); //default it to 1x speed
-  const [speedIndex, setSpeedIndex] = useState(1); 
+  const playbackSpeeds = [0.5, 1, 1.5, 2]
+  const maxSpeedIndex = playbackSpeeds.length - 1
+  const [playbackSpeed, setPlaybackSpeed] = useState(playbackSpeeds[1]) //default it to 1x speed
+  const [speedIndex, setSpeedIndex] = useState(1)
 
   const changePlaybackSpeed = () => {
-    const nextSpeedIndex = speedIndex === maxSpeedIndex ? 0 : speedIndex + 1; //at 2, we go back to 0
-    setSpeedIndex(nextSpeedIndex);
-    setPlaybackSpeed(playbackSpeeds[nextSpeedIndex]);
-  };
-
+    const nextSpeedIndex = speedIndex === maxSpeedIndex ? 0 : speedIndex + 1 //at 2, we go back to 0
+    setSpeedIndex(nextSpeedIndex)
+    setPlaybackSpeed(playbackSpeeds[nextSpeedIndex])
+  }
 
   return (
     <View style={styles.background}>
@@ -50,7 +49,9 @@ const AudioScreen = (): JSX.Element => {
           value={sliderValue}
           onValueChange={handleSliderChange}
         />
-        <Text style={styles.textStyle}>{sliderValue.toFixed(0)}%</Text>
+        <Text style={styles.textStyle}>
+          {((sliderValue / audioLength) * 100).toFixed(0)}%
+        </Text>
         <View style={styles.audioControllerContainer}>
           <TouchableOpacity onPress={() => {}}>
             <Image
@@ -101,15 +102,15 @@ const AudioScreen = (): JSX.Element => {
             />
           </TouchableOpacity>
           <TouchableOpacity onPress={changePlaybackSpeed}>
-            <Text style = {styles.textStyle}>{playbackSpeed}X</Text>
+            <Text style={styles.textStyle}>{playbackSpeed}X</Text>
           </TouchableOpacity>
         </View>
       </View>
       <Image
-              source={require('../assets/headphones.png')}
-            style={[styles.buttonStyle, {marginTop: 20}]}
-            />
-        <Text style= {styles.subTextStyle}>Audio Only</Text>
+        source={require('../assets/headphones.png')}
+        style={[styles.buttonStyle, {marginTop: 20}]}
+      />
+      <Text style={styles.subTextStyle}>Audio Only</Text>
     </View>
   )
 }
@@ -183,7 +184,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 9,
     paddingTop: 5,
-  }
+  },
 })
 
 export default AudioScreen
