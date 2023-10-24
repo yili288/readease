@@ -14,6 +14,18 @@ const AudioScreen = (): JSX.Element => {
     setSliderValue(value)
   }
 
+  const playbackSpeeds = [0.5, 1, 1.5, 2];
+  const maxSpeedIndex = playbackSpeeds.length - 1;
+  const [playbackSpeed, setPlaybackSpeed] = useState(playbackSpeeds[1]); //default it to 1x speed
+  const [speedIndex, setSpeedIndex] = useState(0); 
+
+  const changePlaybackSpeed = () => {
+    const nextSpeedIndex = speedIndex === maxSpeedIndex ? 0 : speedIndex + 1; //at 2, we go back to 0
+    setSpeedIndex(nextSpeedIndex);
+    setPlaybackSpeed(playbackSpeeds[nextSpeedIndex]);
+  };
+
+
   return (
     <View style={styles.background}>
       <View style={styles.navContainer}>
@@ -51,7 +63,7 @@ const AudioScreen = (): JSX.Element => {
               if (sliderValue >= 5) {
                 setSliderValue(sliderValue - 5)
               } else {
-                setSliderValue(0) 
+                setSliderValue(0)
               }
             }}>
             <Image
@@ -81,6 +93,17 @@ const AudioScreen = (): JSX.Element => {
             />
           </TouchableOpacity>
         </View>
+        <View style={styles.preferencesContainer}>
+          <TouchableOpacity onPress={() => {}}>
+            <Image
+              source={require('../assets/person.png')}
+              style={styles.buttonStyle}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={changePlaybackSpeed}>
+            <Text style = {styles.textStyle}>{playbackSpeed}X</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   )
@@ -107,7 +130,12 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   audioControllerContainer: {
-    marginTop: 30,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  preferencesContainer: {
+    marginTop: 10,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -128,7 +156,7 @@ const styles = StyleSheet.create({
     fontStyle: 'normal',
     fontWeight: '700',
     lineHeight: 30,
-    marginTop: 30,
+    marginTop: 20,
     paddingHorizontal: 50,
   },
   playerImageStyle: {
