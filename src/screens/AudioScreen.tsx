@@ -17,7 +17,7 @@ const AudioScreen = (): JSX.Element => {
   const playbackSpeeds = [0.5, 1, 1.5, 2];
   const maxSpeedIndex = playbackSpeeds.length - 1;
   const [playbackSpeed, setPlaybackSpeed] = useState(playbackSpeeds[1]); //default it to 1x speed
-  const [speedIndex, setSpeedIndex] = useState(0); 
+  const [speedIndex, setSpeedIndex] = useState(1); 
 
   const changePlaybackSpeed = () => {
     const nextSpeedIndex = speedIndex === maxSpeedIndex ? 0 : speedIndex + 1; //at 2, we go back to 0
