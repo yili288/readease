@@ -105,6 +105,11 @@ const AudioScreen = (): JSX.Element => {
           </TouchableOpacity>
         </View>
       </View>
+      <Image
+              source={require('../assets/headphones.png')}
+            style={[styles.buttonStyle, {marginTop: 20}]}
+            />
+        <Text style= {styles.subTextStyle}>Audio Only</Text>
     </View>
   )
 }
@@ -172,6 +177,13 @@ const styles = StyleSheet.create({
     fontFamily: 'Manrope',
     fontWeight: 'bold',
   },
+  subTextStyle: {
+    color: '#FFF',
+    fontFamily: 'Manrope',
+    fontWeight: 'bold',
+    fontSize: 9,
+    paddingTop: 5,
+  }
 })
 
 export default AudioScreen
