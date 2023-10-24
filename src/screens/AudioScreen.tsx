@@ -80,9 +80,9 @@ const AudioScreen = (): JSX.Element => {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-                if (sliderValue + 5 <= audioLength) {
-              setSliderValue(sliderValue + 5)
-                }
+              if (sliderValue + 5 <= audioLength) {
+                setSliderValue(sliderValue + 5)
+              }
             }}>
             <Image
               source={require('../assets/goforward.png')}
