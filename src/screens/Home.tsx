@@ -4,11 +4,13 @@ import saveAudioFile from '../utils/saveAudioFile';
 import AudioPlayer from '../components/AudioPlayer';
 import { textToSpeech } from '../utils/textToSpeech';
 
+const textJson = {'title': "Text Title", 'content': "This is a paragraph of text, I'm making this longer to see what happens when it reaches the edge of the phone screen, spoiler it wraps. \n\nThis is a second paragraph.", 'audio_file_id':"1"}
+
 const Home = (): JSX.Element => {
   
   const textToAudio = async () => {
     // send file text to server
-    const response = await textToSpeech ("Hello, This is a hardcoded test.")
+    const response = await textToSpeech (textJson.content)
     if (response != null){
       saveAudioFile(response)
     }
@@ -20,7 +22,6 @@ const Home = (): JSX.Element => {
     //const url = ""
     //const textJson = loadParseJson(url);
     //hardcoded json file for now until can use fetch to get texts from server
-    const textJson = {'title': "Text Title", 'content': "This is a paragraph of text, I'm making this longer to see what happens when it reaches the edge of the phone screen, spoiler it wraps. \n\nThis is a second paragraph.", 'audio_file_id':"1"}
     setTitle(textJson.title);
     setContent(textJson.content);
   }
@@ -45,7 +46,8 @@ const Home = (): JSX.Element => {
 //not sure where I should put this will leave here for now 
 var styles = StyleSheet.create({
   titleText: {
-    fontSize: 35,
+    margin: 20,
+    fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
     color: 'black',
@@ -53,10 +55,10 @@ var styles = StyleSheet.create({
     paddingRight: 10,
   },
   baseText: {
-    fontSize: 12,
+    fontSize: 16,
     color: 'black',
-    paddingLeft:5,
-    paddingRight:5,
+    paddingLeft:10,
+    paddingRight:10,
     //to set font would need fonts in assets folder
     //fontFamily: 'Arial',
   },
