@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {Text, View, TouchableOpacity, Image, StyleSheet} from 'react-native'
 import {Slider} from '@react-native-assets/slider'
 
-const AudioScreen = (): JSX.Element => {
+const AudioScreen = ({ navigation }): JSX.Element => {
   //TODO: Dynamically load the image and text
   const playerImageURL =
     'https://s3-alpha-sig.figma.com/img/50dc/8a30/5e43c25c1cefdfb51be8639c30d04b57?Expires=1699228800&Signature=SpBEk3Xt0lHZkppm21uyJK~2V1pu2m4EBkw251xpCmkSaFIVtEYyQCRxJysuBDoTn00htErWfTzj5FPAan3wn2cdY4MsFMSJk0EdZW8GXunVjuW~icCloGP6NSHheReOL0dLKKy0bXireuXyQbF~sFrRNmdlrLVUhAS6YWCVm9372cL~XbMwihiXVRgTane8dCH~yqSiKJhEvHDZGOaNd3xpmHjpruNlkPAa3Uy26YLwpv-R9rc5OWFb27jSdlaRsmPa0msAylLtYZqME6prIcM-tEb-ckjL-404IIr~h6X-MtqZha2x~ZLssZbyKNPvYCsclqJiNQenkfYYKDY4dg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4'
@@ -28,7 +28,7 @@ const AudioScreen = (): JSX.Element => {
   return (
     <View style={styles.background}>
       <View style={styles.navContainer}>
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
           <Image
             source={require('../assets/backArrow.png')}
             style={styles.buttonStyle}

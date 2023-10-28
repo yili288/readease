@@ -1,10 +1,10 @@
 import React, { useState} from 'react';
-import { Text, View, Button, StyleSheet } from 'react-native';
+import { Text, View, Button, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
 import saveAudioFile from '../utils/saveAudioFile';
 import AudioPlayer from '../components/AudioPlayer';
 import { textToSpeech } from '../utils/textToSpeech';
 
-const Home = (): JSX.Element => {
+const Home = ({ navigation }): JSX.Element => {
   
   const textToAudio = async () => {
     // send file text to server
@@ -20,46 +20,87 @@ const Home = (): JSX.Element => {
     //const url = ""
     //const textJson = loadParseJson(url);
     //hardcoded json file for now until can use fetch to get texts from server
-    const textJson = {'title': "Text Title", 'content': "This is a paragraph of text, I'm making this longer to see what happens when it reaches the edge of the phone screen, spoiler it wraps. \n\nThis is a second paragraph.", 'audio_file_id':"1"}
+    const textJson = {'title': "Neoclassicism and Early Romanticism In Britain", 'content': "British tourists and artists in Italy were the leading supporters of early Neoclassiscism, partly because of the burgeoning taste for revival styles at home. Nonetheless, the British interest in Classical revival styles was inflected slightly differently from Roman Neoclassiscism. While Roman Neoclassiscism looked to the past in order to revive a sense of moral and civic virtue, many later eighteenth-century British artists harnessed the concept of civic virtue to patriotism to create more Romantic works of art dedicated specifically to the British. In conclusion, Neoclassicism in Britain was a significant artistic and architectural movement that celebrated the timeless beauty of classical antiquity, contributed to the Enlightenment's intellectual climate, and left an enduring mark on British culture and aesthetics. It remains an important chapter in the history of British art, architecture, and literature.", 'audio_file_id':"1"}
     setTitle(textJson.title);
     setContent(textJson.content);
   }
 
   return (
-    <View> 
-      <Text style={styles.titleText}>{title}</Text>
-      <Text style={styles.baseText}>{content}{'\n'}</Text>
-      <Button
-        title= 'Display Text'
-        onPress={displayText}
-       />
-      <Button
-        title='Get audio'
-        onPress={textToAudio}
-      />
-      <AudioPlayer/>
+    <View style={styles.homeBackground}>
+      <ScrollView>
+        <View> 
+          <Text style={styles.titleText}>{title}</Text>
+          <Text style={styles.baseText}>{content}{'\n'}</Text>
+          <View style={styles.navigationBarContainer}> 
+            <TouchableOpacity style={styles.navBarButtonContainer} onPress={displayText}>
+              <Image
+                style={styles.navBarButtonImage}
+                source={require('../assets/text.png')}
+              />
+              <Text style={styles.navBarButtonText}>Display Text</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.navBarButtonContainer} onPress={() => navigation.navigate('AudioScreen')}>
+              <Image
+                style={styles.navBarButtonImage}
+                source={require('../assets/headphones.png')}
+              />
+              <Text style={styles.navBarButtonText}>Audio Only</Text>
+              </TouchableOpacity>
+          </View>
+        </View>
+      </ScrollView>
     </View>
   );
 };
 
-//not sure where I should put this will leave here for now 
 var styles = StyleSheet.create({
+  homeBackground: {
+
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+  },
   titleText: {
-    fontSize: 35,
-    fontWeight: 'bold',
+    fontSize: 30,
     textAlign: 'center',
     color: 'black',
-    paddingLeft:10,
-    paddingRight: 10,
+    paddingHorizontal: 10,
+    paddingTop: 10,
+    lineHeight: 35,
+    fontFamily: 'Lexend Bold',
   },
   baseText: {
-    fontSize: 12,
+    fontSize: 20,
     color: 'black',
-    paddingLeft:5,
-    paddingRight:5,
-    //to set font would need fonts in assets folder
-    //fontFamily: 'Arial',
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    lineHeight: 35,
+    fontFamily: 'Lexend Black',
   },
+  navigationBarContainer: {
+    position: 'absolute',
+    bottom: 0,
+    opacity: 0.7,
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: '#000000',
+    alignItems: 'center',
+  },
+  navBarButtonContainer: {
+    flex: 1,
+    opacity: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  navBarButtonText: {
+    color: '#FFFFFF',
+    textAlign: 'center',
+    fontFamily: 'Lexend Bold',
+    fontSize: 10,
+  },
+  navBarButtonImage:{
+    width: 40,
+    height: 40,
+  }
 });
 
 export default Home;
