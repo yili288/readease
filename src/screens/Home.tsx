@@ -28,24 +28,43 @@ const Home = ({ navigation }): JSX.Element => {
   return (
     <View style={styles.homeBackground}>
       <ScrollView>
-        <View> 
+        <View style={styles.homeContainer}> 
+          <View style={styles.topBarContainer}>
+            <TouchableOpacity style={styles.topBarExitButtonContainer} onPress={() => {}}>
+                <Image
+                  style={styles.topBarExitButton}
+                  source={require('../assets/exit.png')}
+                />
+              </TouchableOpacity>
+              <View></View>
+              <TouchableOpacity style={styles.topBarExitButtonContainer} onPress={() => {}}>
+                <Text style={styles.saveButtonText}>Save</Text>
+              </TouchableOpacity>
+          </View>
           <Text style={styles.titleText}>{title}</Text>
           <Text style={styles.baseText}>{content}{'\n'}</Text>
-          <View style={styles.navigationBarContainer}> 
+          <View style={styles.navBarContainer}> 
             <TouchableOpacity style={styles.navBarButtonContainer} onPress={displayText}>
               <Image
                 style={styles.navBarButtonImage}
                 source={require('../assets/text.png')}
               />
-              <Text style={styles.navBarButtonText}>Display Text</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.navBarButtonContainer} onPress={() => navigation.navigate('AudioScreen')}>
+              <Text style={styles.navBarButtonText}>Original</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.navBarButtonContainer} onPress={() => navigation.navigate('AudioScreen')}>
               <Image
                 style={styles.navBarButtonImage}
                 source={require('../assets/headphones.png')}
               />
               <Text style={styles.navBarButtonText}>Audio Only</Text>
-              </TouchableOpacity>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.navBarButtonContainer} onPress={() => {}}>
+              <Image
+                style={styles.navBarButtonImage}
+                source={require('../assets/summary.png')}
+              />
+              <Text style={styles.navBarButtonText}>Summary</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
@@ -55,28 +74,53 @@ const Home = ({ navigation }): JSX.Element => {
 
 var styles = StyleSheet.create({
   homeBackground: {
-
     flex: 1,
     backgroundColor: '#FFFFFF',
   },
-  titleText: {
-    fontSize: 30,
-    textAlign: 'center',
+  homeContainer: {
+    flex: 1,
+    width: '90%',
+    alignSelf: 'center',
+  },
+  topBarContainer: {
+    position: 'relative',
+    top: 0,
+    left: 0,
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingBottom: 5,
+  },
+  topBarExitButtonContainer: {
+    marginTop: 10,
+  },
+  topBarExitButton: {
+    width: 25,
+    height: 25,
+    alignSelf: 'center',
+  },
+  saveButtonText:{
     color: 'black',
-    paddingHorizontal: 10,
-    paddingTop: 10,
+    fontFamily: 'Lexend Black',
+    fontSize: 20,
+  },
+  titleText: {
+    position: 'relative',
+    fontSize: 30,
+    textAlign: 'left',
+    color: 'black',
+    paddingVertical: 10,
     lineHeight: 35,
     fontFamily: 'Lexend Bold',
   },
   baseText: {
     fontSize: 20,
     color: 'black',
-    paddingHorizontal: 15,
     paddingVertical: 10,
     lineHeight: 35,
     fontFamily: 'Lexend Black',
   },
-  navigationBarContainer: {
+  navBarContainer: {
     position: 'absolute',
     bottom: 0,
     opacity: 0.7,
@@ -84,12 +128,12 @@ var styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#000000',
     alignItems: 'center',
+    justifyContent: 'space-around',
   },
   navBarButtonContainer: {
     flex: 1,
     opacity: 1,
     alignItems: 'center',
-    justifyContent: 'center',
   },
   navBarButtonText: {
     color: '#FFFFFF',
