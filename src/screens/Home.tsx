@@ -43,7 +43,9 @@ const Home = ({ navigation }): JSX.Element => {
           </View>
           <Text style={styles.titleText}>{title}</Text>
           <Text style={styles.baseText}>{content}{'\n'}</Text>
-          <View style={styles.navBarContainer}> 
+        </View>
+      </ScrollView>
+      <View style={styles.navBarContainer}> 
             <TouchableOpacity style={styles.navBarButtonContainer} onPress={displayText}>
               <Image
                 style={styles.navBarButtonImage}
@@ -66,8 +68,6 @@ const Home = ({ navigation }): JSX.Element => {
               <Text style={styles.navBarButtonText}>Summary</Text>
             </TouchableOpacity>
           </View>
-        </View>
-      </ScrollView>
     </View>
   );
 };
@@ -122,13 +122,16 @@ var styles = StyleSheet.create({
   },
   navBarContainer: {
     position: 'absolute',
-    bottom: 0,
+    bottom: 30,
+    borderRadius: 10,
     opacity: 0.7,
     flex: 1,
     flexDirection: 'row',
     backgroundColor: '#000000',
     alignItems: 'center',
     justifyContent: 'space-around',
+    width: '90%',
+    alignSelf: 'center',
   },
   navBarButtonContainer: {
     flex: 1,
