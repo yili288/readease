@@ -1,0 +1,113 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/Helvetica/Helvetica Black Condensed/Helvetica Black Condensed.otf",
+      "sha1": "2468e8fdc16ba474862624c294eb3a0567991474"
+    },
+    {
+      "path": "src/assets/fonts/Helvetica/Helvetica Black Condensed Oblique/Helvetica Black Condensed Oblique.otf",
+      "sha1": "12e6980edf987901223954ad95c9f5c5a635ac74"
+    },
+    {
+      "path": "src/assets/fonts/Helvetica/Helvetica Bold Condensed/Helvetica Bold Condensed.otf",
+      "sha1": "8b9d8d7295df95e505644f9d15e5075f837ef4d0"
+    },
+    {
+      "path": "src/assets/fonts/Helvetica/Helvetica Bold Condensed Oblique/Helvetica Bold Condensed Oblique.otf",
+      "sha1": "a0c3ed14aef0919a192d5137581a51d5ccd36ade"
+    },
+    {
+      "path": "src/assets/fonts/Helvetica/Helvetica Bold Italic/Helvetica Bold Italic.ttf",
+      "sha1": "759aa1283aa5da7ed61640ec1a70759c1de0d42e"
+    },
+    {
+      "path": "src/assets/fonts/Helvetica/Helvetica Bold Narrow Oblique/Helvetica Bold Narrow Oblique.otf",
+      "sha1": "aed6def2c01f7583fc56c037cd8826b49227e011"
+    },
+    {
+      "path": "src/assets/fonts/Helvetica/Helvetica BoldOblique/Helvetica BoldOblique.ttf",
+      "sha1": "b1526cd97453ab2c0b52430d9b7e29fedd84b1b4"
+    },
+    {
+      "path": "src/assets/fonts/Helvetica/Helvetica CE Bold/Helvetica CE Bold.otf",
+      "sha1": "a0f68896302b706b02eb38beae904ffd64067357"
+    },
+    {
+      "path": "src/assets/fonts/Helvetica/Helvetica CE Bold Condensed/Helvetica CE Bold Condensed.otf",
+      "sha1": "bbcdf9b73b25490fd5206f3ee064d7a171db9269"
+    },
+    {
+      "path": "src/assets/fonts/Helvetica/Helvetica CE Bold Condensed Oblique/Helvetica CE Bold Condensed Oblique.otf",
+      "sha1": "7593c9f36d4b9c5c881bbd2245edefe8fd11462b"
+    },
+    {
+      "path": "src/assets/fonts/Helvetica/Helvetica CE Bold Narrow/Helvetica CE Bold Narrow.otf",
+      "sha1": "0ef948d99dad35e5db2a9cadcf572352cb822d16"
+    },
+    {
+      "path": "src/assets/fonts/Helvetica/Helvetica CE Bold Narrow Oblique/Helvetica CE Bold Narrow Oblique.otf",
+      "sha1": "342e3ed3249c436f152193c8f2465785935e5d69"
+    },
+    {
+      "path": "src/assets/fonts/Helvetica/Helvetica CE Bold Oblique/Helvetica CE Bold Oblique.otf",
+      "sha1": "3ad173dc5472d3a05d0ea43a0f9be297ef487b91"
+    },
+    {
+      "path": "src/assets/fonts/Helvetica/Helvetica CE Condensed Oblique/Helvetica CE Condensed Oblique.otf",
+      "sha1": "3857ce8cc208459c68056b741c0ce49dfa0cb3b7"
+    },
+    {
+      "path": "src/assets/fonts/Helvetica/Helvetica CE Medium/Helvetica CE Medium.otf",
+      "sha1": "f1f14f6def94ce5395f8cb9bd8aa066d59a931e5"
+    },
+    {
+      "path": "src/assets/fonts/Helvetica/Helvetica CE Medium Condensed/Helvetica CE Medium Condensed.otf",
+      "sha1": "65d6cfc9f881e53d4d3e8cda7958b0adac7eb931"
+    },
+    {
+      "path": "src/assets/fonts/Helvetica/Helvetica CE Narrow/Helvetica CE Narrow.otf",
+      "sha1": "11b7aeaa46adec7ae8d9a651417afc49a564a795"
+    },
+    {
+      "path": "src/assets/fonts/Helvetica/Helvetica CE Narrow Oblique/Helvetica CE Narrow Oblique.otf",
+      "sha1": "9f4e0d946ea476f30674c2a66cf99b3378bb55cd"
+    },
+    {
+      "path": "src/assets/fonts/Helvetica/Helvetica CE Oblique/Helvetica CE Oblique.otf",
+      "sha1": "5c65e5e0429d56f7012643b262fc22cb02b9dcc1"
+    },
+    {
+      "path": "src/assets/fonts/Helvetica/Helvetica Condensed Oblique/Helvetica Condensed Oblique.otf",
+      "sha1": "f8f3987d199f2742659bccb900d47afbf46fd89f"
+    },
+    {
+      "path": "src/assets/fonts/Helvetica/Helvetica Light Condensed/Helvetica Light Condensed.otf",
+      "sha1": "de80fe5c82fda95757ada41da0d2affc36ed45e0"
+    },
+    {
+      "path": "src/assets/fonts/Helvetica/Helvetica Light Condensed Oblique/Helvetica Light Condensed Oblique.otf",
+      "sha1": "dc73e1db0199ec10fa6ac1712350b9a04dc3af57"
+    },
+    {
+      "path": "src/assets/fonts/Helvetica/Helvetica Medium Condensed/Helvetica Medium Condensed.otf",
+      "sha1": "3686c674e6700e625c4c77a2851059d9e2e3fd8d"
+    },
+    {
+      "path": "src/assets/fonts/Helvetica/Helvetica Roman/Helvetica Roman.ttf",
+      "sha1": "36eddcdcdf5f7faf2f9c76ccb97ec2cde90c538d"
+    },
+    {
+      "path": "src/assets/fonts/Helvetica/Helvetica RomanItalic/Helvetica RomanItalic.ttf",
+      "sha1": "5a4271f5e4fae483562e8da4b51f3365f60f0c0e"
+    },
+    {
+      "path": "src/assets/fonts/Helvetica/Helvetica Ultra Compressed/Helvetica Ultra Compressed.otf",
+      "sha1": "205df259f1012d35ee48bcbef2ea021b9e3937cf"
+    },
+    {
+      "path": "src/assets/fonts/Helvetica/readme.html",
+      "sha1": "e2f5090b41382362a881d75b6fa4b80af1d65559"
+    }
+  ]
+}

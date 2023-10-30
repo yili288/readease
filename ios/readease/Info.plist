@@ -36,7 +36,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -51,5 +51,34 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Helvetica Black Condensed.otf</string>
+		<string>Helvetica Black Condensed Oblique.otf</string>
+		<string>Helvetica Bold Condensed.otf</string>
+		<string>Helvetica Bold Condensed Oblique.otf</string>
+		<string>Helvetica Bold Narrow Oblique.otf</string>
+		<string>Helvetica CE Bold.otf</string>
+		<string>Helvetica CE Bold Condensed.otf</string>
+		<string>Helvetica CE Bold Condensed Oblique.otf</string>
+		<string>Helvetica CE Bold Narrow.otf</string>
+		<string>Helvetica CE Bold Narrow Oblique.otf</string>
+		<string>Helvetica CE Bold Oblique.otf</string>
+		<string>Helvetica CE Condensed Oblique.otf</string>
+		<string>Helvetica CE Medium.otf</string>
+		<string>Helvetica CE Medium Condensed.otf</string>
+		<string>Helvetica CE Narrow.otf</string>
+		<string>Helvetica CE Narrow Oblique.otf</string>
+		<string>Helvetica CE Oblique.otf</string>
+		<string>Helvetica Condensed Oblique.otf</string>
+		<string>Helvetica Light Condensed.otf</string>
+		<string>Helvetica Light Condensed Oblique.otf</string>
+		<string>Helvetica Medium Condensed.otf</string>
+		<string>Helvetica Ultra Compressed.otf</string>
+		<string>Helvetica Bold Italic.ttf</string>
+		<string>Helvetica BoldOblique.ttf</string>
+		<string>Helvetica Roman.ttf</string>
+		<string>Helvetica RomanItalic.ttf</string>
+	</array>
 </dict>
 </plist>
