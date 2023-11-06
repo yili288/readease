@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {Text, View, TouchableOpacity, Image, StyleSheet} from 'react-native'
 import {Slider} from '@react-native-assets/slider'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
 const AudioScreen = ({ navigation }): JSX.Element => {
   //TODO: Dynamically load the image and text
@@ -26,94 +27,96 @@ const AudioScreen = ({ navigation }): JSX.Element => {
   }
 
   return (
-    <View style={styles.background}>
-      <View style={styles.navContainer}>
-        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-          <Image
-            source={require('../assets/backArrow.png')}
-            style={styles.buttonStyle}
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <View style={styles.background}>
+        <View style={styles.navContainer}>
+          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+            <Image
+              source={require('../assets/backArrow.png')}
+              style={styles.buttonStyle}
+            />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.audioDetailContainer}>
+          <Image source={{uri: playerImageURL}} style={styles.playerImageStyle} />
+          <Text style={styles.audioTitleStyle}>{playerText}</Text>
+        </View>
+        <View style={styles.audioPlayerContainer}>
+          <Slider
+            style={styles.sliderStyle}
+            minimumValue={0}
+            maximumValue={audioLength}
+            minimumTrackTintColor="white"
+            thumbTintColor="white"
+            value={sliderValue}
+            onValueChange={handleSliderChange}
           />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.audioDetailContainer}>
-        <Image source={{uri: playerImageURL}} style={styles.playerImageStyle} />
-        <Text style={styles.audioTitleStyle}>{playerText}</Text>
-      </View>
-      <View style={styles.audioPlayerContainer}>
-        <Slider
-          style={styles.sliderStyle}
-          minimumValue={0}
-          maximumValue={audioLength}
-          minimumTrackTintColor="white"
-          thumbTintColor="white"
-          value={sliderValue}
-          onValueChange={handleSliderChange}
+          <Text style={styles.textStyle}>
+            {((sliderValue / audioLength) * 100).toFixed(0)}%
+          </Text>
+          <View style={styles.audioControllerContainer}>
+            <TouchableOpacity onPress={() => {}}>
+              <Image
+                source={require('../assets/backtrack.png')}
+                style={styles.buttonStyle}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                if (sliderValue >= 5) {
+                  setSliderValue(sliderValue - 5)
+                } else {
+                  setSliderValue(0)
+                }
+              }}>
+              <Image
+                source={require('../assets/gobackward.png')}
+                style={styles.buttonStyle}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => {}}>
+              <Image
+                source={require('../assets/play.jpg')}
+                style={styles.playerButtonStyle}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                if (sliderValue + 5 <= audioLength) {
+                  setSliderValue(sliderValue + 5)
+                }
+              }}>
+              <Image
+                source={require('../assets/goforward.png')}
+                style={styles.buttonStyle}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => {}}>
+              <Image
+                source={require('../assets/fasttrack.png')}
+                style={styles.buttonStyle}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.preferencesContainer}>
+            <TouchableOpacity onPress={() => {}}>
+              <Image
+                source={require('../assets/person.png')}
+                style={styles.buttonStyle}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={changePlaybackSpeed}>
+              <Text style={styles.textStyle}>{playbackSpeed}X</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <Image
+          source={require('../assets/headphones.png')}
+          style={[styles.buttonStyle, {marginTop: 20}]}
         />
-        <Text style={styles.textStyle}>
-          {((sliderValue / audioLength) * 100).toFixed(0)}%
-        </Text>
-        <View style={styles.audioControllerContainer}>
-          <TouchableOpacity onPress={() => {}}>
-            <Image
-              source={require('../assets/backtrack.png')}
-              style={styles.buttonStyle}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              if (sliderValue >= 5) {
-                setSliderValue(sliderValue - 5)
-              } else {
-                setSliderValue(0)
-              }
-            }}>
-            <Image
-              source={require('../assets/gobackward.png')}
-              style={styles.buttonStyle}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => {}}>
-            <Image
-              source={require('../assets/play.jpg')}
-              style={styles.playerButtonStyle}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              if (sliderValue + 5 <= audioLength) {
-                setSliderValue(sliderValue + 5)
-              }
-            }}>
-            <Image
-              source={require('../assets/goforward.png')}
-              style={styles.buttonStyle}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => {}}>
-            <Image
-              source={require('../assets/fasttrack.png')}
-              style={styles.buttonStyle}
-            />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.preferencesContainer}>
-          <TouchableOpacity onPress={() => {}}>
-            <Image
-              source={require('../assets/person.png')}
-              style={styles.buttonStyle}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={changePlaybackSpeed}>
-            <Text style={styles.textStyle}>{playbackSpeed}X</Text>
-          </TouchableOpacity>
-        </View>
+        <Text style={styles.subTextStyle}>Audio Only</Text>
       </View>
-      <Image
-        source={require('../assets/headphones.png')}
-        style={[styles.buttonStyle, {marginTop: 20}]}
-      />
-      <Text style={styles.subTextStyle}>Audio Only</Text>
-    </View>
+    </GestureHandlerRootView>
   )
 }
 
