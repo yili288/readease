@@ -29,11 +29,12 @@ const AudioScreen = ({ navigation }): JSX.Element => {
   const progress = useSharedValue(0)
   const intervalRef = useRef(setInterval(()=>{}));
   const audioLength = audio.getDuration()
+  const offset = 5; //seconds
 
-  const handleSliderChange = (value: number) => {
-    progress.value = value
-    audio.setCurrentTime(progress.value)
-  }
+  // const handleSliderChange = (value: number) => {
+    // progress.value = value
+    // audio.setCurrentTime(progress.value)
+  // }
 
   const handlePlayPause = () => {
     if (isPlaying) {
@@ -78,10 +79,10 @@ const AudioScreen = ({ navigation }): JSX.Element => {
   const goBack = () => {
     audio.getCurrentTime((seconds) => {
       let newTime = 0;
-      if (seconds - 2 < 0)
+      if (seconds - offset < 0)
         newTime = 0;
       else
-        newTime = seconds - 2;
+        newTime = seconds - offset;
       audio.setCurrentTime(newTime)
       progress.value = newTime
       setPercentComplete((newTime / audioLength) * 100);
@@ -91,10 +92,10 @@ const AudioScreen = ({ navigation }): JSX.Element => {
   const goForward = () => {
     audio.getCurrentTime((seconds) => {
       let newTime = 0;
-      if (seconds + 2 > audioLength)
+      if (seconds + offset > audioLength)
         newTime = audioLength;
       else
-        newTime = seconds + 2;
+        newTime = seconds + offset;
       audio.setCurrentTime(newTime)
       progress.value = newTime
       setPercentComplete((newTime / audioLength) * 100);
@@ -127,7 +128,7 @@ const AudioScreen = ({ navigation }): JSX.Element => {
               bubbleBackgroundColor: '#666',
               maximumTrackTintColor: '#1B3340',
             }}
-            onValueChange={handleSliderChange}
+            // onValueChange={handleSliderChange}
           />
           <Text style={styles.textStyle}>
             {percentComplete.toFixed(0)}%
