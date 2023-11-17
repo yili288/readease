@@ -31,8 +31,8 @@ const AudioScreen = ({ navigation }): JSX.Element => {
   const audioLength = audio.getDuration()
 
   const handleSliderChange = (value: number) => {
-    // progress.value = value
-    // audio.setCurrentTime(progress.value)
+    progress.value = value
+    audio.setCurrentTime(progress.value)
   }
 
   const handlePlayPause = () => {
@@ -52,7 +52,7 @@ const AudioScreen = ({ navigation }): JSX.Element => {
 
   const trackCurrentAudioTime = () => {
     const intervalId = setInterval(() => {
-      audio.getCurrentTime((seconds, isPlay) => {
+      audio.getCurrentTime((seconds) => {
         progress.value = seconds;
         setPercentComplete((seconds / audioLength) * 100);
       });
@@ -61,8 +61,7 @@ const AudioScreen = ({ navigation }): JSX.Element => {
   }
 
   const stopTrackingCurrentAudioTime = () => {
-    const intervalId = intervalRef.current;
-    clearInterval(intervalId);
+    clearInterval(intervalRef.current);
   }
   
   const playbackSpeeds = [0.5, 1, 1.5, 2]
@@ -77,27 +76,29 @@ const AudioScreen = ({ navigation }): JSX.Element => {
   }
 
   const goBack = () => {
-    stopTrackingCurrentAudioTime()
-    if (progress.value >= 5) {
-      progress.value =  progress.value - 5
-      audio.setCurrentTime(progress.value - 5)
-    } else {
-      progress.value = 0
-      audio.setCurrentTime(0)
-    }
-    trackCurrentAudioTime()
+    audio.getCurrentTime((seconds) => {
+      let newTime = 0;
+      if (seconds - 2 < 0)
+        newTime = 0;
+      else
+        newTime = seconds - 2;
+      audio.setCurrentTime(newTime)
+      progress.value = newTime
+      setPercentComplete((newTime / audioLength) * 100);
+    })
   }
 
   const goForward = () => {
-    stopTrackingCurrentAudioTime()
-    if (progress.value <= audioLength - 5) {
-      progress.value = progress.value + 5
-      audio.setCurrentTime(progress.value + 5)
-    } else {
-      progress.value = audioLength
-      audio.setCurrentTime(audioLength)
-    }
-    trackCurrentAudioTime()
+    audio.getCurrentTime((seconds) => {
+      let newTime = 0;
+      if (seconds + 2 > audioLength)
+        newTime = audioLength;
+      else
+        newTime = seconds + 2;
+      audio.setCurrentTime(newTime)
+      progress.value = newTime
+      setPercentComplete((newTime / audioLength) * 100);
+    })
   }
   
   return (
