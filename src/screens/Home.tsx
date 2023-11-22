@@ -17,8 +17,8 @@ const Home = ({ navigation }): JSX.Element => {
     saveAudioFile(response)
   }
 
-  // todo: get text id from database
-  const textId = null;
+  // todo: get text id from text id list
+  const textId = 1;
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [pageSelect, setPageSelect] = useState<pageSelect>("original"); // limits the data type

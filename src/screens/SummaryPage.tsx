@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, useWindowDimensions, Text, StyleSheet, ScrollView } from 'react-native';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
-import getTextSummary from '../utils/getTextSummary'
+import getTextSummary from '../utils/fetch'
 
 const KeywordsTab = () => {
   return <View style={{flex: 1, backgroundColor: '#9BD3DD'}}></View>
@@ -11,6 +11,9 @@ const PointsTab = ({title, summary}) => {
   return (
     <ScrollView>
       <Text style={styles.titleText}>{title}</Text>
+      {
+        summary ? <Text style={styles.baseText}>{summary}{'\n\n'}</Text>: <Text style={styles.baseText}>Loading...</Text>
+      }
       <Text style={styles.baseText}>{summary}{'\n\n'}</Text>
     </ScrollView>
   )
