@@ -63,7 +63,7 @@ const SummaryPage = ({textId, title, content}): JSX.Element => {
     <>
       <TabView
         navigationState={{ index, routes }}
-        renderScene={(route) => renderScene(route)}
+        renderScene={({route}) => renderScene(route)}
         renderTabBar={renderTabBar}
         onIndexChange={setIndex}
         initialLayout={{ width: layout.width }}
