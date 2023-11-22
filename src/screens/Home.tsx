@@ -16,6 +16,9 @@ const Home = ({ navigation }): JSX.Element => {
     }
     saveAudioFile(response)
   }
+
+  // todo: get text id from database
+  const textId = null;
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [pageSelect, setPageSelect] = useState<pageSelect>("original"); // limits the data type
@@ -62,7 +65,7 @@ const Home = ({ navigation }): JSX.Element => {
           ) 
           : pageSelect == "summary" ?
           (
-            <SummaryPage title={title} content={content}/>
+            <SummaryPage textId={textId} title={title} content={content}/>
           ) : null // no page selected
         }
       </View>

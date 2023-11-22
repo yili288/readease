@@ -16,8 +16,7 @@ const PointsTab = ({title, summary}) => {
   )
 }
 
-const SummaryPage = ({title, content}): JSX.Element => {
-  const textId = null;
+const SummaryPage = ({textId, title, content}): JSX.Element => {
   const layout = useWindowDimensions();
 
   const [index, setIndex] = useState(0);
