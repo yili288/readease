@@ -11,7 +11,7 @@ const PointsTab = ({title, summary}) => {
   return (
     <ScrollView>
       <Text style={styles.titleText}>{title}</Text>
-      <Text style={styles.baseText}>{summary}</Text>
+      <Text style={styles.baseText}>{summary}{'\n\n'}</Text>
     </ScrollView>
   )
 }

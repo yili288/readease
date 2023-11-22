@@ -60,7 +60,7 @@ const Home = ({ navigation }): JSX.Element => {
           (
             <ScrollView>
               <Text style={styles.titleText}>{title}</Text>
-              <Text style={styles.baseText}>{content}{'\n'}</Text>
+              <Text style={styles.baseText}>{content}{'\n\n'}</Text>
             </ScrollView>
           ) 
           : pageSelect == "summary" ?
