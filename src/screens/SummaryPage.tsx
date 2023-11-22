@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, useWindowDimensions, Text, StyleSheet, ScrollView } from 'react-native';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 import getTextSummary from '../utils/getTextSummary'
@@ -7,20 +7,17 @@ const KeywordsTab = () => {
   return <View style={{flex: 1, backgroundColor: '#9BD3DD'}}></View>
 }
 
-const PointsTab = ({title, content}) => {
-  // Change to text summary api when it is done
-  // const summaryBulletPoints = getTextSummary(null, content);
-  const summaryBulletPoints = content; 
-
+const PointsTab = ({title, summary}) => {
   return (
-    <ScrollView /*style={{borderWidth: 2, borderColor: 'pink'}}*/>
+    <ScrollView>
       <Text style={styles.titleText}>{title}</Text>
-      <Text style={styles.baseText}>{summaryBulletPoints}</Text>
+      <Text style={styles.baseText}>{summary}</Text>
     </ScrollView>
   )
 }
 
 const SummaryPage = ({title, content}): JSX.Element => {
+  const textId = null;
   const layout = useWindowDimensions();
 
   const [index, setIndex] = useState(0);
@@ -30,25 +27,35 @@ const SummaryPage = ({title, content}): JSX.Element => {
     { key: 'points', title: 'Points' },
   ]);
 
+  const [summaryBulletPoints, setSummaryBulletPoints] = useState("")
+
+  useEffect(() => {
+    getTextSummary(textId, content).then((result) => {
+      if (result) {
+        setSummaryBulletPoints(result)
+      }
+    })
+  }, [content])
+
   const renderScene = (route) => {
     if (route.key == 'keywords') {
       return <KeywordsTab/>;
     }else if (route.key == 'points') {
-      return <PointsTab title={title} content={content}/>;
+      return <PointsTab title={title} summary={summaryBulletPoints}/>;
     }
   }
 
   const renderTabBar = (props) => {
     return (
-        <TabBar
-          {...props}  // parameters from TabView
-          style={styles.tabBar}
-          gap={14}
-          tabStyle={styles.tabItem}
-          labelStyle={styles.tabLabelStyle}
-          indicatorStyle={{backgroundColor: "black"}}
-          contentContainerStyle={{margin: 0}}
-        />
+      <TabBar
+        {...props}  // parameters from TabView
+        style={styles.tabBar}
+        gap={14}
+        tabStyle={styles.tabItem}
+        labelStyle={styles.tabLabelStyle}
+        indicatorStyle={{backgroundColor: "black"}}
+        contentContainerStyle={{margin: 0}}
+      />
     )
   }
 
