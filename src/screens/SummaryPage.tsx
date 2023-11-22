@@ -26,16 +26,17 @@ const SummaryPage = ({textId, title, content}): JSX.Element => {
     { key: 'points', title: 'Points' },
   ]);
 
-  const [summaryBulletPoints, setSummaryBulletPoints] = useState("")
+  const [summaryBulletPoints, setSummaryBulletPoints] = useState("");
 
   useEffect(() => {
     getTextSummary(textId, content).then((result) => {
       if (result) {
-        setSummaryBulletPoints(result)
+        setSummaryBulletPoints(result);
       }
     })
-  }, [content])
+  }, [content]);
 
+  // render Tab content
   const renderScene = (route) => {
     if (route.key == 'keywords') {
       return <KeywordsTab/>;
@@ -44,16 +45,16 @@ const SummaryPage = ({textId, title, content}): JSX.Element => {
     }
   }
 
+  // render Tab navigation bar
   const renderTabBar = (props) => {
     return (
       <TabBar
-        {...props}  // parameters from TabView
+        {...props}  // pass down parameters from TabView
         style={styles.tabBar}
         gap={14}
         tabStyle={styles.tabItem}
         labelStyle={styles.tabLabelStyle}
-        indicatorStyle={{backgroundColor: "black"}}
-        contentContainerStyle={{margin: 0}}
+        indicatorStyle={styles.tabIndicator} // underline label
       />
     )
   }
@@ -62,7 +63,7 @@ const SummaryPage = ({textId, title, content}): JSX.Element => {
     <>
       <TabView
         navigationState={{ index, routes }}
-        renderScene={({route}) => renderScene(route)}
+        renderScene={(route) => renderScene(route)}
         renderTabBar={renderTabBar}
         onIndexChange={setIndex}
         initialLayout={{ width: layout.width }}
@@ -81,6 +82,9 @@ const styles = StyleSheet.create({
   },
   tabBar: {
     backgroundColor: '#fff',
+  },
+  tabIndicator: {
+    backgroundColor: '#000'
   },
   tabItem: {
     width: 'auto',
