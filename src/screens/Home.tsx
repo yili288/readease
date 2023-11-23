@@ -1,8 +1,10 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, Button, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
 import saveAudioFile from '../utils/saveAudioFile';
 import AudioPlayer from '../components/AudioPlayer';
 import { textToSpeech } from '../utils/textToSpeech';
+import { pageSelect } from '../types';
+import SummaryPage from './SummaryPage';
 
 const Home = ({ navigation }): JSX.Element => {
   
@@ -14,8 +16,22 @@ const Home = ({ navigation }): JSX.Element => {
     }
     saveAudioFile(response)
   }
+
+  // todo: get text id from text id list
+  const textId = 1;
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [pageSelect, setPageSelect] = useState<pageSelect>("original"); // limits the data type
+
+  useEffect(() => {
+    displayText();
+  })
+
+  const onOriginalTextButtonPress = () => {
+    displayText();
+    setPageSelect("original");
+  }
+  
   const displayText = () => {
     //const url = ""
     //const textJson = loadParseJson(url);
@@ -27,26 +43,34 @@ const Home = ({ navigation }): JSX.Element => {
 
   return (
     <View style={styles.homeBackground}>
-      <ScrollView>
-        <View style={styles.homeContainer}> 
-          <View style={styles.topBarContainer}>
-            <TouchableOpacity style={styles.topBarExitButtonContainer} onPress={() => {}}>
-                <Image
-                  style={styles.topBarExitButton}
-                  source={require('../assets/exit.png')}
-                />
-              </TouchableOpacity>
-              <View></View>
-              <TouchableOpacity style={styles.topBarExitButtonContainer} onPress={() => {}}>
-                <Text style={styles.saveButtonText}>Save</Text>
-              </TouchableOpacity>
-          </View>
-          <Text style={styles.titleText}>{title}</Text>
-          <Text style={styles.baseText}>{content}{'\n'}</Text>
+      <View style={styles.homeContainer}> 
+        <View style={styles.topBarContainer}>
+          <TouchableOpacity style={styles.topBarExitButtonContainer} onPress={() => {}}>
+            <Image
+              style={styles.topBarExitButton}
+              source={require('../assets/exit.png')}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.topBarExitButtonContainer} onPress={() => {}}>
+            <Text style={styles.saveButtonText}>Save</Text>
+          </TouchableOpacity>
         </View>
-      </ScrollView>
+        {
+          pageSelect == "original" ?
+          (
+            <ScrollView>
+              <Text style={styles.titleText}>{title}</Text>
+              <Text style={styles.baseText}>{content}{'\n\n'}</Text>
+            </ScrollView>
+          ) 
+          : pageSelect == "summary" ?
+          (
+            <SummaryPage textId={textId} title={title} content={content}/>
+          ) : null // no page selected
+        }
+      </View>
       <View style={styles.navBarContainer}> 
-            <TouchableOpacity style={styles.navBarButtonContainer} onPress={displayText}>
+            <TouchableOpacity style={styles.navBarButtonContainer} onPress={onOriginalTextButtonPress}>
               <Image
                 style={styles.navBarButtonImage}
                 source={require('../assets/text.png')}
@@ -60,7 +84,7 @@ const Home = ({ navigation }): JSX.Element => {
               />
               <Text style={styles.navBarButtonText}>Audio Only</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.navBarButtonContainer} onPress={() => {}}>
+            <TouchableOpacity style={styles.navBarButtonContainer} onPress={() => setPageSelect("summary")}>
               <Image
                 style={styles.navBarButtonImage}
                 source={require('../assets/summary.png')}
@@ -86,10 +110,10 @@ var styles = StyleSheet.create({
     position: 'relative',
     top: 0,
     left: 0,
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingBottom: 5,
+    paddingTop: 10,
+    paddingBottom: 10,
   },
   topBarExitButtonContainer: {
     marginTop: 10,
@@ -105,7 +129,6 @@ var styles = StyleSheet.create({
     fontSize: 20,
   },
   titleText: {
-    position: 'relative',
     fontSize: 30,
     textAlign: 'left',
     color: 'black',
