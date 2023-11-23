@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, useWindowDimensions, Text, StyleSheet, ScrollView } from 'react-native';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
-import getTextSummary from '../utils/fetch'
+import getTextSummary from '../utils/getTextSummary'
 
 const KeywordsTab = () => {
   return <View style={{flex: 1, backgroundColor: '#9BD3DD'}}></View>
