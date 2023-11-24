@@ -11,13 +11,13 @@ var styles = StyleSheet.create({
 Sound.setCategory('Playback');
 
 // fetch audio file
-var audio = new Sound('hello.wav', RNFS.DocumentDirectoryPath, (error) => {
-  if (error) {
-    console.log('failed to load the sound', error.message);
-    return;
-  }
-  // loaded successfully
-});
+// var audio = new Sound('hello.wav', RNFS.DocumentDirectoryPath, (error) => {
+//   if (error) {
+//     console.log('failed to load the sound', error.message);
+//     return;
+//   }
+//   // loaded successfully
+// });
 
 export const AudioPlayer = () => {
   // local variable within this component

@@ -1,7 +1,9 @@
 import RNFS from 'react-native-fs';
 
-const saveAudioFile = (response) => {
-  var path = RNFS.DocumentDirectoryPath + '/hello.wav';
+const saveAudioFile = (textId, response) => {
+  var path = RNFS.DocumentDirectoryPath + '/' + textId + '.wav';
+
+  if (!response) return;
 
   // decode base 64 and save as audio file
   RNFS.writeFile(path, response.audioContent, 'base64') 
