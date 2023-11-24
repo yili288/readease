@@ -21,7 +21,7 @@ var audio = new Sound('hello.wav', RNFS.DocumentDirectoryPath, (error) => {
 const AudioScreen = ({ navigation }): JSX.Element => {
   //TODO: Dynamically load the image and text
   const playerImageURL =
-    'https://s3-alpha-sig.figma.com/img/50dc/8a30/5e43c25c1cefdfb51be8639c30d04b57?Expires=1699228800&Signature=SpBEk3Xt0lHZkppm21uyJK~2V1pu2m4EBkw251xpCmkSaFIVtEYyQCRxJysuBDoTn00htErWfTzj5FPAan3wn2cdY4MsFMSJk0EdZW8GXunVjuW~icCloGP6NSHheReOL0dLKKy0bXireuXyQbF~sFrRNmdlrLVUhAS6YWCVm9372cL~XbMwihiXVRgTane8dCH~yqSiKJhEvHDZGOaNd3xpmHjpruNlkPAa3Uy26YLwpv-R9rc5OWFb27jSdlaRsmPa0msAylLtYZqME6prIcM-tEb-ckjL-404IIr~h6X-MtqZha2x~ZLssZbyKNPvYCsclqJiNQenkfYYKDY4dg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4'
+    'https://cdn.discordapp.com/attachments/837783679810928671/1177453309150384198/image.png?ex=65728fd8&is=65601ad8&hm=fe9299e0e4c886bc973d482ab7a766ccab7eb4d98db319cb992e82b10b22a25a&'
   const playerText = 'Neoclassicism And Early Romanticism In Britain'
   
   const [isPlaying, setIsPlaying] = useState(false);  //initialised to false
