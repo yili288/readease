@@ -35,7 +35,6 @@ const OriginalText = ({ navigation }): JSX.Element => {
   }
   
   const displayText = async() => {
-    //const url = ""
     //const textJson = loadParseJson(url);
     //hardcoded json file for now until can use fetch to get texts from server
     const data = await getTextTitle(textId)
