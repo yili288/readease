@@ -6,6 +6,7 @@ import { textToSpeech } from '../utils/textToSpeech';
 import { pageSelect } from '../types';
 import SummaryPage from './SummaryPage';
 import HomePage from './HomePage';
+import getTextTitle from '../utils/getTextTitleAndContent'
 
 const OriginalText = ({ navigation }): JSX.Element => {
   
@@ -33,13 +34,14 @@ const OriginalText = ({ navigation }): JSX.Element => {
     setPageSelect("original");
   }
   
-  const displayText = () => {
+  const displayText = async() => {
     //const url = ""
     //const textJson = loadParseJson(url);
     //hardcoded json file for now until can use fetch to get texts from server
-    const textJson = {'title': "Neoclassicism and Early Romanticism In Britain", 'content': "British tourists and artists in Italy were the leading supporters of early Neoclassiscism, partly because of the burgeoning taste for revival styles at home. Nonetheless, the British interest in Classical revival styles was inflected slightly differently from Roman Neoclassiscism. While Roman Neoclassiscism looked to the past in order to revive a sense of moral and civic virtue, many later eighteenth-century British artists harnessed the concept of civic virtue to patriotism to create more Romantic works of art dedicated specifically to the British. In conclusion, Neoclassicism in Britain was a significant artistic and architectural movement that celebrated the timeless beauty of classical antiquity, contributed to the Enlightenment's intellectual climate, and left an enduring mark on British culture and aesthetics. It remains an important chapter in the history of British art, architecture, and literature.", 'audio_file_id':"1"}
+    const data = await getTextTitle(textId)
+    const textJson = {'title': data.name /*"Neoclassicism and Early Romanticism In Britain"*/, 'content': data.content /*"British tourists and artists in Italy were the leading supporters of early Neoclassiscism, partly because of the burgeoning taste for revival styles at home. Nonetheless, the British interest in Classical revival styles was inflected slightly differently from Roman Neoclassiscism. While Roman Neoclassiscism looked to the past in order to revive a sense of moral and civic virtue, many later eighteenth-century British artists harnessed the concept of civic virtue to patriotism to create more Romantic works of art dedicated specifically to the British. In conclusion, Neoclassicism in Britain was a significant artistic and architectural movement that celebrated the timeless beauty of classical antiquity, contributed to the Enlightenment's intellectual climate, and left an enduring mark on British culture and aesthetics. It remains an important chapter in the history of British art, architecture, and literature."*/, 'audio_file_id':"1"}
     setTitle(textJson.title);
-    setContent(textJson.content);
+    setContent(textJson.content);    
   }
 
   return (
