@@ -5,8 +5,9 @@ import AudioPlayer from '../components/AudioPlayer';
 import { textToSpeech } from '../utils/textToSpeech';
 import { pageSelect } from '../types';
 import SummaryPage from './SummaryPage';
+import HomePage from './HomePage';
 
-const Home = ({ navigation }): JSX.Element => {
+const OriginalText = ({ navigation }): JSX.Element => {
   
   const textToAudio = async () => {
     // send file text to server
@@ -42,10 +43,10 @@ const Home = ({ navigation }): JSX.Element => {
   }
 
   return (
-    <View style={styles.homeBackground}>
-      <View style={styles.homeContainer}> 
+    <View style={styles.originalTextBackground}>
+      <View style={styles.originalTextContainer}> 
         <View style={styles.topBarContainer}>
-          <TouchableOpacity style={styles.topBarExitButtonContainer} onPress={() => {}}>
+          <TouchableOpacity style={styles.topBarExitButtonContainer} onPress={() => navigation.navigate('HomePage')}>
             <Image
               style={styles.topBarExitButton}
               source={require('../assets/exit.png')}
@@ -66,7 +67,8 @@ const Home = ({ navigation }): JSX.Element => {
           : pageSelect == "summary" ?
           (
             <SummaryPage textId={textId} title={title} content={content}/>
-          ) : null // no page selected
+          ) 
+          : null // no page selected
         }
       </View>
       <View style={styles.navBarContainer}> 
@@ -97,11 +99,11 @@ const Home = ({ navigation }): JSX.Element => {
 };
 
 var styles = StyleSheet.create({
-  homeBackground: {
+  originalTextBackground: {
     flex: 1,
     backgroundColor: '#FFFFFF',
   },
-  homeContainer: {
+  originalTextContainer: {
     flex: 1,
     width: '90%',
     alignSelf: 'center',
@@ -173,4 +175,4 @@ var styles = StyleSheet.create({
   }
 });
 
-export default Home;
+export default OriginalText;

@@ -106,7 +106,7 @@ const AudioScreen = ({ navigation }): JSX.Element => {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <View style={styles.background}>
         <View style={styles.navContainer}>
-          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          <TouchableOpacity onPress={() => navigation.navigate('OriginalText')}>
             <Image
               source={require('../assets/backArrow.png')}
               style={styles.buttonStyle}
