@@ -104,6 +104,9 @@ const AudioScreen = ({ navigation }): JSX.Element => {
   
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
+      <View style={{width: 0, height: 0}}>
+        <Text>Audio only</Text>
+      </View>
       <View style={styles.background}>
         <View style={styles.navContainer}>
           <TouchableOpacity onPress={() => navigation.navigate('Home')}>

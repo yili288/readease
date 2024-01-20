@@ -77,14 +77,20 @@ const Home = ({ navigation }): JSX.Element => {
               />
               <Text style={styles.navBarButtonText}>Original</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.navBarButtonContainer} onPress={() => navigation.navigate('AudioScreen')}>
+            <TouchableOpacity 
+              testID='audioButton'
+              style={styles.navBarButtonContainer} 
+              onPress={() => navigation.navigate('AudioScreen')}>
               <Image
                 style={styles.navBarButtonImage}
                 source={require('../assets/headphones.png')}
               />
               <Text style={styles.navBarButtonText}>Audio Only</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.navBarButtonContainer} onPress={() => setPageSelect("summary")}>
+            <TouchableOpacity 
+              testID='summaryButton'
+              style={styles.navBarButtonContainer}
+              onPress={() => setPageSelect("summary")}>
               <Image
                 style={styles.navBarButtonImage}
                 source={require('../assets/summary.png')}
