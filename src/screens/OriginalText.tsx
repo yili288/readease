@@ -79,7 +79,13 @@ const OriginalText = ({ navigation }): JSX.Element => {
               />
               <Text style={styles.navBarButtonText}>Original</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.navBarButtonContainer} onPress={() => navigation.navigate('AudioScreen')}>
+            <TouchableOpacity 
+              style={styles.navBarButtonContainer} 
+              onPress={() => navigation.navigate('AudioScreen', {
+                textId, 
+                text: content,
+              })}
+            >
               <Image
                 style={styles.navBarButtonImage}
                 source={require('../assets/headphones.png')}
