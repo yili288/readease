@@ -9,7 +9,7 @@ const Stack = createNativeStackNavigator();
 // this is a component
 export const Navigator = () => {
   return (
-      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Home">
+      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="HomePage">
         <Stack.Screen name="OriginalText" component={OriginalText} />
         <Stack.Screen name="AudioScreen" component={AudioScreen} />
         <Stack.Screen name="HomePage" component={HomePage} />

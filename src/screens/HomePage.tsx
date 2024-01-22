@@ -1,33 +1,38 @@
 import React, { useState, useEffect } from 'react';
-import { Image, Text, TouchableOpacity, View, StyleSheet, ScrollView} from 'react-native';
+import { Image, Text, TouchableOpacity, View, StyleSheet, ScrollView, SafeAreaView} from 'react-native';
 
 const HomePage = ({ navigation }): JSX.Element => {
 
     return(
-        <View style={styles.homePageContainer}>
-            <View style={styles.topRowContainer}>
-                <Text style={styles.homeTitleText}>Home</Text>
-                <TouchableOpacity onPress={() => {}}>
-                    <Image source={require('../assets/settings.png')} />
-                </TouchableOpacity>
+        <SafeAreaView style={styles.safeAreacontainer}>
+            <View style={styles.homePageContainer}>
+                <View style={styles.topRowContainer}>
+                    <Text style={styles.homeTitleText}>Home</Text>
+                    <TouchableOpacity onPress={() => {}}>
+                        <Image source={require('../assets/settings.png')} />
+                    </TouchableOpacity>
+                </View>
+                <ScrollView>
+                    <TouchableOpacity onPress={() => navigation.navigate('OriginalText')}>
+                        <Image style={styles.documentThumbnail} source={require('../assets/textThumbnail.png')} />
+                        <Text style={styles.documentTitleText}>Neoclassicism and Early...</Text>
+                    </TouchableOpacity>
+                </ScrollView>
+                <View>
+                    <TouchableOpacity style={styles.uploadButton} onPress={() => {}}>
+                        <Image
+                            source={require('../assets/upload.png')}
+                        />
+                    </TouchableOpacity>
+                </View>
             </View>
-            <ScrollView>
-                <TouchableOpacity onPress={() => navigation.navigate('OriginalText')}>
-                    <Image style={styles.documentThumbnail} source={require('../assets/textThumbnail.png')} />
-                    <Text style={styles.documentTitleText}>Neoclassicism and Early...</Text>
-                </TouchableOpacity>
-            </ScrollView>
-            <View>
-                <TouchableOpacity style={styles.uploadButton} onPress={() => {}}>
-                    <Image
-                        source={require('../assets/upload.png')}
-                    />
-                </TouchableOpacity>
-            </View>
-        </View>
+        </SafeAreaView>
     );
 }
 var styles = StyleSheet.create({
+    safeAreacontainer: {
+        flex: 1,
+    },
     homePageContainer: {
         padding: 10,
         height: '100%',
