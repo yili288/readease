@@ -4,8 +4,22 @@ import Sound from 'react-native-sound';
 
 jest.useFakeTimers();
 
+const AudioScreenMock = (
+  <AudioScreen
+    route={{
+      params: {
+        textId: 1,
+        text: "",
+      },
+    }}
+    navigation={{
+      navigate: jest.fn(),
+    }}
+  />
+)
+
 it('Should play and pause audio', async () => {
-  const { getByLabelText } = render(<AudioScreen></AudioScreen>);
+  const { getByLabelText } = render(AudioScreenMock);
   fireEvent.press(getByLabelText('playButton'));
 
   // Wait for the audio to play
@@ -18,7 +32,7 @@ it('Should play and pause audio', async () => {
 });
 
 it('Should skip forward audio', async () => {
-  const { getByLabelText } = render(<AudioScreen></AudioScreen>);
+  const { getByLabelText } = render(AudioScreenMock);
   fireEvent.press(getByLabelText('goForward'));
 
   // Wait for the audio to skip forward
@@ -29,7 +43,7 @@ it('Should skip forward audio', async () => {
 });
 
 it('Should move back audio', async () => {
-  const { getByLabelText } = render(<AudioScreen></AudioScreen>);
+  const { getByLabelText } = render(AudioScreenMock);
   fireEvent.press(getByLabelText('goBack'));
 
   // Wait for the audio to skip forward
