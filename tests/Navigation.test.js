@@ -1,17 +1,39 @@
-import { render, fireEvent, screen } from '@testing-library/react-native';
-import Home from '../src/screens/Home';
+import { render, fireEvent, screen, waitFor } from '@testing-library/react-native';
 import Navigator from '../src/navigation/Navigator';
+import { NavigationContainer } from "@react-navigation/native";
 
-it('Should navigate to audio page', () => {
-  render(<Navigator initialRouteName="Home" />);
-  const { getByTestId } = render(<AudioScreen />);
-  fireEvent.press(getByTestId('audioButton'));
-  expect(screen.name).toBe('AudioScreen');
+jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
+
+jest.mock('../src/utils/getTextSummary', () => {
+  return jest.fn(() => {
+    return new Promise((resolve, reject) => {
+      resolve("test summary");
+    })
+  })
 });
 
-it('Should navigate to summary page', () => {
-  render(<Navigator initialRouteName="Home" />);
-  const { getByTestId } = render(<Home />);
+// to mock setInterval used in AudioScreen
+jest.useFakeTimers();
+
+it('Should navigate to audio page', () => {
+  const { getByTestId } = render(
+    <NavigationContainer>
+      <Navigator></Navigator>
+    </NavigationContainer>
+  );
+  fireEvent.press(getByTestId('audioButton'));
+  expect(screen.getByText('Audio Only')).toBeOnTheScreen();
+});
+
+it('Should navigate to summary page', async () => {
+  const { getByTestId } = render(
+    <NavigationContainer>
+      <Navigator></Navigator>
+    </NavigationContainer>
+  );
   fireEvent.press(getByTestId('summaryButton'));
-  expect(screen.getByText('Points')).toBeOnTheScreen();
+
+  await waitFor(() => screen.getAllByText('Points'));
+
+  expect(screen.getAllByText('Points')).toHaveLength(2);
 })

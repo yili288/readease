@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, Button, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
 import saveAudioFile from '../utils/saveAudioFile';
-import AudioPlayer from '../components/AudioPlayer';
 import { textToSpeech } from '../utils/textToSpeech';
 import { pageSelect } from '../types';
 import SummaryPage from './SummaryPage';
