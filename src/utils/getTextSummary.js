@@ -19,7 +19,6 @@ const getTextSummary = (textId, text, forceRegenerate=false) => {
     }
     return response.json()
   }).then(data => {
-    console.log("api return", data.summary)
     return data.summary
   })
   .catch(error => {

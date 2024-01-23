@@ -6,35 +6,57 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useSharedValue } from 'react-native-reanimated';
 import Sound from 'react-native-sound';
 import { StyleSheet } from 'react-native'
+import saveAudioFile from '../utils/saveAudioFile';
+import { textToSpeech } from '../utils/textToSpeech';
 
 Sound.setCategory('Playback');
 
-// fetch audio file
-var audio = new Sound('hello.wav', RNFS.DocumentDirectoryPath, (error) => {
-  if (error) {
-    console.log('failed to load the sound', error.message);
-    return;
-  }
-  // loaded successfully
-});
+const AudioScreen = ({ route, navigation }): JSX.Element => {
+  const { textId, text } = route.params;
 
-const AudioScreen = ({ navigation }): JSX.Element => {
   //TODO: Dynamically load the image and text
   const playerImageURL =
     'https://cdn.discordapp.com/attachments/837783679810928671/1177453309150384198/image.png?ex=65728fd8&is=65601ad8&hm=fe9299e0e4c886bc973d482ab7a766ccab7eb4d98db319cb992e82b10b22a25a&'
   const playerText = 'Neoclassicism And Early Romanticism In Britain'
-  
+
+  const [audio, setAudio] = useState(new Sound("")); //initialised to the sound object
   const [isPlaying, setIsPlaying] = useState(false);  //initialised to false
   const [percentComplete, setPercentComplete] = useState(0);
   const progress = useSharedValue(0)
   const intervalRef = useRef(setInterval(()=>{}));
-  const audioLength = audio.getDuration()
-  const offset = 5; //seconds
 
+  const [audioLength, setAudioLength] = useState(0);
+  const offset = 5; //seconds
+  
+  // todo: Seek to a specific point in the audio
   // const handleSliderChange = (value: number) => {
     // progress.value = value
     // audio.setCurrentTime(progress.value)
   // }
+
+  useEffect(() => {
+    const convertAndSaveFile = async (textId, text) => {
+      // send text to server
+      const response = await textToSpeech(textId, text)
+      if (response != null){
+        saveAudioFile(textId, response)
+        loadAudio(textId);
+      }
+    }
+    convertAndSaveFile(textId, text);
+  }, [text, textId])
+
+  const loadAudio = (textId) => {
+    let audio = new Sound(`${textId}.wav`, RNFS.DocumentDirectoryPath, (error) => {
+      if (error) {
+        console.error('failed to load the sound', error.message);
+        return;
+      }
+      // loaded successfully
+      setAudio(audio);
+      setAudioLength(audio.getDuration());
+    })
+  }
 
   const handlePlayPause = () => {
     if (isPlaying) {
@@ -54,15 +76,19 @@ const AudioScreen = ({ navigation }): JSX.Element => {
   const trackCurrentAudioTime = () => {
     const intervalId = setInterval(() => {
       audio.getCurrentTime((seconds) => {
-        progress.value = seconds;
-        setPercentComplete((seconds / audioLength) * 100);
+        progress.value = timeToPercent(seconds);
+        setPercentComplete(timeToPercent(seconds));
       });
-    }, 10);
+    }, 1000);
     intervalRef.current = intervalId;
   }
 
   const stopTrackingCurrentAudioTime = () => {
     clearInterval(intervalRef.current);
+  }
+
+  const timeToPercent = (time: number) => {
+    return (time / audioLength) * 100;
   }
   
   const playbackSpeeds = [0.5, 1, 1.5, 2]
@@ -84,21 +110,21 @@ const AudioScreen = ({ navigation }): JSX.Element => {
       else
         newTime = seconds - offset;
       audio.setCurrentTime(newTime)
-      progress.value = newTime
-      setPercentComplete((newTime / audioLength) * 100);
+      progress.value = timeToPercent(newTime);
+      setPercentComplete(timeToPercent(newTime));
     })
   }
 
   const goForward = () => {
     audio.getCurrentTime((seconds) => {
       let newTime = 0;
-      if (seconds + offset > audioLength)
-        newTime = audioLength;
+      if (seconds + offset > audio.getDuration())
+        newTime = audio.getDuration();
       else
         newTime = seconds + offset;
-      audio.setCurrentTime(newTime)
-      progress.value = newTime
-      setPercentComplete((newTime / audioLength) * 100);
+      audio.setCurrentTime(newTime);
+      progress.value = timeToPercent(newTime);
+      setPercentComplete(timeToPercent(newTime));
     })
   }
   
@@ -109,7 +135,7 @@ const AudioScreen = ({ navigation }): JSX.Element => {
       </View>
       <View style={styles.background}>
         <View style={styles.navContainer}>
-          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          <TouchableOpacity onPress={() => navigation.navigate('OriginalText')}>
             <Image
               source={require('../assets/backArrow.png')}
               style={styles.buttonStyle}
@@ -125,7 +151,7 @@ const AudioScreen = ({ navigation }): JSX.Element => {
             style={styles.sliderStyle}
             progress={progress}
             minimumValue={useSharedValue(0)}
-            maximumValue={useSharedValue(audioLength)}
+            maximumValue={useSharedValue(100)}
             theme={{
               minimumTrackTintColor: '#fff',
               bubbleBackgroundColor: '#666',
