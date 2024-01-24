@@ -1,9 +1,9 @@
 import axios from 'axios'
-const apiUrl = 'http://localhost:3000/texts'
+const apiUrl = 'http://localhost:3000'
 
 const getTextTitleAndContent = async (textId) => {
     try{
-      const response = await axios.get(`http://localhost:3000/texts/${textId}`)
+      const response = await axios.get(`${apiUrl}/texts/${textId}`)
       console.log('Fetched Text')
       return response.data.foundText
   
