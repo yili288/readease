@@ -35,8 +35,6 @@ const OriginalText = ({ navigation }): JSX.Element => {
   }
   
   const displayText = async() => {
-    //const textJson = loadParseJson(url);
-    //hardcoded json file for now until can use fetch to get texts from server
     const data = await getTextTitle(textId)
     const textJson = {'title': data.name, 'content': data.content, 'audio_file_id':"1"}
     setTitle(textJson.title);
