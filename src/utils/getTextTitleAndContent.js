@@ -1,7 +1,7 @@
 import axios from 'axios'
 const apiUrl = 'http://localhost:3000/texts'
 
-const getTextTitle = async (textId) => {
+const getTextTitleAndContent = async (textId) => {
     try{
       const response = await axios.get(`http://localhost:3000/texts/${textId}`)
       console.log('Fetched Text')
@@ -14,4 +14,4 @@ const getTextTitle = async (textId) => {
     }
 }
 
-export default getTextTitle
+export default getTextTitleAndContent

@@ -6,7 +6,7 @@ import { textToSpeech } from '../utils/textToSpeech';
 import { pageSelect } from '../types';
 import SummaryPage from './SummaryPage';
 import HomePage from './HomePage';
-import getTextTitle from '../utils/getTextTitleAndContent'
+import getTextTitleAndContent from '../utils/getTextTitleAndContent'
 
 const OriginalText = ({ navigation }): JSX.Element => {
   
@@ -35,7 +35,7 @@ const OriginalText = ({ navigation }): JSX.Element => {
   }
   
   const displayText = async() => {
-    const data = await getTextTitle(textId)
+    const data = await getTextTitleAndContent(textId)
     const textJson = {'title': data.name, 'content': data.content, 'audio_file_id':"1"}
     setTitle(textJson.title);
     setContent(textJson.content);    
