@@ -17,6 +17,14 @@ jest.fn(() =>
   })
 );
 
+jest.mock('../src/utils/getTextTitleAndContent', () => {
+  return jest.fn(() => {
+    return new Promise((resolve, reject) => {
+      resolve({"name": "test name", "content": "test content"});
+    })
+  })
+});
+
 jest.mock('../src/utils/getTextSummary', () => {
   return jest.fn(() => {
     return new Promise((resolve, reject) => {
