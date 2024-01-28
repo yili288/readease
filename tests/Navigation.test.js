@@ -48,9 +48,11 @@ it('Should navigate to audio page', async () => {
   fireEvent.press(getByTestId('originalText'));
 
   // act
-  const audioButton = getByTestId('audioButton')
-  expect(audioButton).toBeOnTheScreen();
-  fireEvent.press(audioButton);
+  await waitFor(() => {
+    const audioButton = getByTestId('audioButton')
+    expect(audioButton).toBeOnTheScreen();
+    fireEvent.press(audioButton);
+  });
 
   //assert
   expect(screen.getByLabelText('playButton')).toBeOnTheScreen();
