@@ -9,7 +9,7 @@ const textToSpeech = async (textId, text) => {
 
     }
     catch(error){
-        console.error('Error converting text to speech.', error);
+        // console.error('Error converting text to speech.', error);
         return null;
     }
    

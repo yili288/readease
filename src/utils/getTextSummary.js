@@ -22,7 +22,7 @@ const getTextSummary = (textId, text, forceRegenerate=false) => {
     return data.summary
   })
   .catch(error => {
-    console.error({'Error fetching data': error});
+    // console.error({'Error fetching data': error});
   });
 }
 

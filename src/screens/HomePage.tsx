@@ -13,7 +13,9 @@ const HomePage = ({ navigation }): JSX.Element => {
                     </TouchableOpacity>
                 </View>
                 <ScrollView>
-                    <TouchableOpacity onPress={() => navigation.navigate('OriginalText')}>
+                    <TouchableOpacity 
+                        testID='originalText'
+                        onPress={() => navigation.navigate('OriginalText')}>
                         <Image style={styles.documentThumbnail} source={require('../assets/textThumbnail.png')} />
                         <Text style={styles.documentTitleText}>Neoclassicism and Early...</Text>
                     </TouchableOpacity>

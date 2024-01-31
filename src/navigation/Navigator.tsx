@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import OriginalText from '../screens/OriginalText';
 import AudioScreen from '../screens/AudioScreen';
 import HomePage from '../screens/HomePage';

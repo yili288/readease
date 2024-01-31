@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, Button, TouchableOpacity, Image, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 import saveAudioFile from '../utils/saveAudioFile';
-import AudioPlayer from '../components/AudioPlayer';
 import { textToSpeech } from '../utils/textToSpeech';
 import { pageSelect } from '../types';
 import SummaryPage from './SummaryPage';
@@ -55,6 +54,7 @@ const OriginalText = ({ navigation }): JSX.Element => {
             <TouchableOpacity style={styles.topBarExitButtonContainer} onPress={() => {}}>
               <Text style={styles.saveButtonText}>Save</Text>
             </TouchableOpacity>
+            
           </View>
           {
             pageSelect == "original" ?
@@ -80,25 +80,29 @@ const OriginalText = ({ navigation }): JSX.Element => {
             <Text style={styles.navBarButtonText}>Original</Text>
           </TouchableOpacity>
           <TouchableOpacity 
-            style={styles.navBarButtonContainer} 
-            onPress={() => navigation.navigate('AudioScreen', {
-              textId, 
-              text: content,
-            })}
-          >
-            <Image
-              style={styles.navBarButtonImage}
-              source={require('../assets/headphones.png')}
-            />
-            <Text style={styles.navBarButtonText}>Audio Only</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.navBarButtonContainer} onPress={() => setPageSelect("summary")}>
-            <Image
-              style={styles.navBarButtonImage}
-              source={require('../assets/summary.png')}
-            />
-            <Text style={styles.navBarButtonText}>Summary</Text>
-          </TouchableOpacity>
+              testID='audioButton'
+              style={styles.navBarButtonContainer} 
+              onPress={() => navigation.navigate('AudioScreen', {
+                textId, 
+                text: content,
+              })}
+              >
+              <Image
+                style={styles.navBarButtonImage}
+                source={require('../assets/headphones.png')}
+              />
+              <Text style={styles.navBarButtonText}>Audio Only</Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              testID='summaryButton'
+              style={styles.navBarButtonContainer}
+              onPress={() => setPageSelect("summary")}>
+              <Image
+                style={styles.navBarButtonImage}
+                source={require('../assets/summary.png')}
+              />
+              <Text style={styles.navBarButtonText}>Summary</Text>
+            </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
