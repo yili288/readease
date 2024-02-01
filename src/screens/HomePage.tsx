@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Image, Text, TouchableOpacity, View, StyleSheet, ScrollView, SafeAreaView, Modal} from 'react-native';
 import { launchImageLibrary } from 'react-native-image-picker';
+import uploadImage from '../utils/uploadImage';
 
 const HomePage = ({ navigation }): JSX.Element => {
     const [uploadModalVisible, setUploadModalVisible] = useState(false);
@@ -42,9 +43,8 @@ const HomePage = ({ navigation }): JSX.Element => {
                             <TouchableOpacity style={styles.uploadOptions} onPress={() => {
                                 launchImageLibrary({mediaType: 'photo'}, (response) => {
                                     if (response.assets !== undefined && response.assets.length > 0) {
-                                        // TODO: upload image to server
+                                        uploadImage(response.assets[0].uri);
                                     }
-                                    setUploadModalVisible(!uploadModalVisible);
                                 });
                             }}>
                                 <Text style={styles.uploadOptionsText}>Upload Image</Text>

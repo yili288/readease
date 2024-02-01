@@ -1,9 +1,9 @@
 import axios from 'axios';
-
+import { apiUrl } from '../constants';
 
 const textToSpeech = async (textId, text) => {
     try{
-        const response = await axios.post('http://localhost:3000/texts/text-to-speech', {text})
+        const response = await axios.post(apiUrl + '/texts/text-to-speech', {text})
         console.log('Text to speech success')
         return response.data
 
