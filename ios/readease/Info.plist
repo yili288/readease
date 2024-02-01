@@ -80,5 +80,9 @@
 		<string>Helvetica Roman.ttf</string>
 		<string>Helvetica RomanItalic.ttf</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string/>
+	<key>NSCameraUsageDescription</key>
+	<string/>
 </dict>
 </plist>

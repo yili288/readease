@@ -21,6 +21,7 @@
     "react-native-awesome-slider": "^2.4.5",
     "react-native-fs": "^2.20.0",
     "react-native-gesture-handler": "^2.12.1",
+    "react-native-image-picker": "^7.1.0",
     "react-native-pager-view": "^6.2.2",
     "react-native-reanimated": "^3.5.1",
     "react-native-safe-area-context": "^4.7.2",
