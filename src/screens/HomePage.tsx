@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Image, Text, TouchableOpacity, View, StyleSheet, ScrollView, SafeAreaView, Modal} from 'react-native';
 import { launchImageLibrary } from 'react-native-image-picker';
 import uploadImage from '../utils/uploadImage';
+import handleImportFiles from '../utils/handleImportFiles';
 
 const HomePage = ({ navigation }): JSX.Element => {
     const [uploadModalVisible, setUploadModalVisible] = useState(false);
@@ -34,7 +35,7 @@ const HomePage = ({ navigation }): JSX.Element => {
                     <View style={styles.centerAlignContainer}>
                         <View style={styles.modalContainer}>
                         <View style={styles.modalButtonsContainer}>
-                            <TouchableOpacity style={styles.uploadOptions} onPress={()=>{}}>
+                            <TouchableOpacity style={styles.uploadOptions} onPress={handleImportFiles}>
                                 <Text style={styles.uploadOptionsText}>Import Files</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.uploadOptions} onPress={()=>{}}>
