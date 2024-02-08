@@ -5,6 +5,18 @@ import uploadImage from '../utils/uploadImage';
 
 const HomePage = ({ navigation }): JSX.Element => {
     const [uploadModalVisible, setUploadModalVisible] = useState(false);
+    
+    const onUploadButtonPressed = () => {
+        launchImageLibrary({mediaType: 'photo'}, async (response) => {
+            if (response.assets !== undefined && response.assets.length > 0) {
+                let textExtracted = "";
+                textExtracted = await uploadImage(response.assets[0].uri);
+                setUploadModalVisible(false);
+                navigation.navigate('OriginalText', {text: textExtracted});
+            }
+        });
+    }
+                            
     return(
         <SafeAreaView style={styles.safeAreacontainer}>
             <View
@@ -40,13 +52,7 @@ const HomePage = ({ navigation }): JSX.Element => {
                             <TouchableOpacity style={styles.uploadOptions} onPress={()=>{}}>
                                 <Text style={styles.uploadOptionsText}>Scan Pages</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.uploadOptions} onPress={() => {
-                                launchImageLibrary({mediaType: 'photo'}, (response) => {
-                                    if (response.assets !== undefined && response.assets.length > 0) {
-                                        uploadImage(response.assets[0].uri);
-                                    }
-                                });
-                            }}>
+                            <TouchableOpacity style={styles.uploadOptions} onPress={onUploadButtonPressed}>
                                 <Text style={styles.uploadOptionsText}>Upload Image</Text>
                             </TouchableOpacity>
                             <TouchableOpacity 

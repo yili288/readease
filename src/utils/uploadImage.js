@@ -5,12 +5,12 @@ import { apiUrl } from '../constants';
 const uploadImage = async (imageUri) => {
   try {
     const formData = new FormData();
-    formData.append('uploaded-image', {
+    formData.append('file', {
       uri: imageUri,
       type: 'image/jpg',
       name: 'image.jpg'
     });
-    const response = await axios.post(apiUrl + '/image/upload', formData, {
+    const response = await axios.post(apiUrl + '/upload', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
@@ -18,7 +18,8 @@ const uploadImage = async (imageUri) => {
     if (!response.status) {
       throw new Error('Error uploading image');
     }
-    return
+    const text = response.data.textFound;
+    return text;
   }
   catch (error) {
     console.error('Error uploading image', error);
