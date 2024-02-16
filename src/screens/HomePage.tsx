@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Image, Text, TouchableOpacity, View, StyleSheet, ScrollView, SafeAreaView, Modal} from 'react-native';
-import { launchImageLibrary } from 'react-native-image-picker';
+import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
 import uploadImage from '../utils/uploadImage';
+import handleImportFiles from '../utils/handleImportFiles';
 
 const HomePage = ({ navigation }): JSX.Element => {
     const [uploadModalVisible, setUploadModalVisible] = useState(false);
@@ -46,10 +47,16 @@ const HomePage = ({ navigation }): JSX.Element => {
                     <View style={styles.centerAlignContainer}>
                         <View style={styles.modalContainer}>
                         <View style={styles.modalButtonsContainer}>
-                            <TouchableOpacity style={styles.uploadOptions} onPress={()=>{}}>
+                            <TouchableOpacity style={styles.uploadOptions} onPress={handleImportFiles}>
                                 <Text style={styles.uploadOptionsText}>Import Files</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.uploadOptions} onPress={()=>{}}>
+                            <TouchableOpacity style={styles.uploadOptions} onPress={()=>{
+                                launchCamera({mediaType: 'photo'}, (response) => {
+                                    if (response.assets !== undefined && response.assets.length > 0) {
+                                        uploadImage(response.assets[0].uri);
+                                    }
+                                });
+                            }}>
                                 <Text style={styles.uploadOptionsText}>Scan Pages</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.uploadOptions} onPress={onUploadButtonPressed}>
