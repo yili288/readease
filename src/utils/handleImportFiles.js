@@ -7,7 +7,7 @@ const handleImportFiles = async () => {
         });
         // upload the picked file to server
         const formData = new FormData();
-        formData.append('uploaded-file', {
+        formData.append('file', {
             uri: res.uri,
             type: res.type,
             name: res.name
