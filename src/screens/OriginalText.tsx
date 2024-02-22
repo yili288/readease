@@ -298,13 +298,6 @@ var styles = StyleSheet.create({
     lineHeight: 35,
     fontFamily: 'Lexend Bold',
   },
-  /*baseText: {
-    fontSize: 20,
-    color: 'black',
-    paddingVertical: 10,
-    lineHeight: 35,
-    fontFamily: 'Lexend Black',
-  },*/
   baseText: {
     fontSize: 20,
     color: 'black',
@@ -313,8 +306,8 @@ var styles = StyleSheet.create({
     fontFamily: 'Lexend Black',
   },
   highlightedText: {
-    backgroundColor: 'yellow', // Example highlight
-    color: 'black', // Adjust text color if needed
+    backgroundColor: 'yellow', 
+    color: 'black',
     fontSize: 20,
     paddingVertical: 10,
     lineHeight: 35,
