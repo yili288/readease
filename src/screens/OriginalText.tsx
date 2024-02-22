@@ -27,6 +27,7 @@ const OriginalText = ({navigation}): JSX.Element => {
   const [audio, setAudio] = useState(null) // Initialize audio as null
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(-1) // Tracks current sentence
   const [timeStamps, setTimeStamps] = useState([]) // Array of time stamps for each sentence
+  const [isPlaying, setIsPlaying] = useState(false) //initialised to false
   const sentences = content.split('. ')
 
   useEffect(() => {
@@ -45,16 +46,34 @@ const OriginalText = ({navigation}): JSX.Element => {
   }
 
   const playInScreenAudio = async () => {
-    const response = await textToSpeech(textId, content)
-    if (response != null) {
-      saveAudioFile(textId, response)
-      loadAudio(textId)
-      if (response.timepoints != null) {
-        const timepoints = response.timepoints
-        const timeStamps = timepoints.map(timepoint => timepoint.timeSeconds)
-        setTimeStamps(timeStamps)
+    if (audio == null) {
+      //audio is not loaded
+      const response = await textToSpeech(textId, content)
+      if (response != null) {
+        saveAudioFile(textId, response)
+        loadAudio(textId)
+        if (response.timepoints != null) {
+          const timepoints = response.timepoints
+          const timeStamps = timepoints.map(timepoint => timepoint.timeSeconds)
+          setTimeStamps(timeStamps)
+        }
       }
     }
+    else{
+      handlePlayPause() //audio already loaded just handle play/pause
+    }
+  }
+
+  const handlePlayPause = () => {
+    if (isPlaying) {
+      audio.pause()
+    } else {
+      audio.setVolume(10)
+      audio.play(success => {
+        setIsPlaying(false)
+      })
+    }
+    setIsPlaying(!isPlaying)
   }
 
   const loadAudio = textId => {
@@ -72,8 +91,11 @@ const OriginalText = ({navigation}): JSX.Element => {
         audio.play(success => {
           if (!success) {
             console.error('Audio playback failed')
+          } else {
+            setIsPlaying(false)
           }
         })
+        setIsPlaying(!isPlaying)
       }
     )
   }
@@ -168,8 +190,8 @@ const OriginalText = ({navigation}): JSX.Element => {
                           ? styles.highlightedText
                           : {}
                       }>
-                      {sentence.trim()} 
-                      {index < sentences.length - 1 ? ". " : ''}
+                      {sentence.trim()}
+                      {index < sentences.length - 1 ? '. ' : ''}
                     </Text>
                   ))}
                 </Text>
@@ -194,9 +216,11 @@ const OriginalText = ({navigation}): JSX.Element => {
             onPress={playInScreenAudio}>
             <Image
               style={styles.playButtonImage}
-              source={require('../assets/play-but.png')} 
+              source={!isPlaying ?  require('../assets/play-but.png') : require('../assets/pause-but.png')}
             />
-            <Text style={styles.navBarButtonText}>Play</Text>
+            <Text style={styles.navBarButtonText}>
+              {isPlaying ? 'Pause' : 'Play'}
+            </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -328,7 +352,7 @@ var styles = StyleSheet.create({
     width: 30,
     height: 28,
     marginBottom: 5,
-    marginTop:3
+    marginTop: 3,
   },
 })
 
