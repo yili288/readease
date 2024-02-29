@@ -1,5 +1,5 @@
-import axios from 'axios'
-const apiUrl = 'http://localhost:3000'
+import axios from 'axios';
+import { apiUrl } from '../constants';
 
 const getTextTitleAndContent = async (textId) => {
     try{

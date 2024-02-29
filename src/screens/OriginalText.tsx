@@ -18,7 +18,10 @@ import getTextTitleAndContent from '../utils/getTextTitleAndContent'
 import RNFS from 'react-native-fs'
 import Sound from 'react-native-sound'
 
-const OriginalText = ({navigation}): JSX.Element => {
+
+const OriginalText = ({ route, navigation }): JSX.Element => {
+  const { text } = route.params;
+
   // todo: get text id from text id list
   const textId = 1
   const [title, setTitle] = useState('')
@@ -147,15 +150,16 @@ const OriginalText = ({navigation}): JSX.Element => {
     intervalId = setInterval(checkAndUpdateHighlight, interval)
   }
 
-  const displayText = async () => {
-    const data = await getTextTitleAndContent(textId)
-    const textJson = {
-      title: data.name,
-      content: data.content,
-      audio_file_id: '1',
-    }
-    setTitle(textJson.title)
-    setContent(textJson.content)
+  const displayText = async() => {
+    if (text) {
+      setTitle(text.name);
+      setContent(text.content);
+    } else {
+      const data = await getTextTitleAndContent(textId)
+      const textJson = {'title': data.name, 'content': data.content, 'audio_file_id':"1"}
+      setTitle(textJson.title);
+      setContent(textJson.content);
+    }     
   }
 
   return (

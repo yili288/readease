@@ -1,4 +1,4 @@
-const apiUrl = 'http://localhost:3000'
+import { apiUrl } from '../constants';
 
 const getTextSummary = (textId, text, forceRegenerate=false) => {
   return fetch(apiUrl + '/summary/text-summary', {
