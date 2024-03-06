@@ -10,15 +10,6 @@ import getTextTitleAndContent from '../utils/getTextTitleAndContent'
 const OriginalText = ({ route, navigation }): JSX.Element => {
   const { text } = route.params;
 
-  const textToAudio = async () => {
-    // send file text to server
-    const response = await textToSpeech ("Hello, This is a hardcoded test.")
-    if (response != null){
-      saveAudioFile(response)
-    }
-    saveAudioFile(response)
-  }
-
   // todo: get text id from text id list
   const textId = 1;
   const [title, setTitle] = useState('');
@@ -40,10 +31,14 @@ const OriginalText = ({ route, navigation }): JSX.Element => {
       setContent(text.content);
     } else {
       const data = await getTextTitleAndContent(textId)
-      const textJson = {'title': data.name, 'content': data.content, 'audio_file_id':"1"}
+      const textJson = {
+        'title': data.name,
+        'content': data.content,
+        'audio_file_id':"1"
+      }
       setTitle(textJson.title);
       setContent(textJson.content);
-    }     
+    }
   }
 
   return (
