@@ -5,7 +5,7 @@ const textToSpeech = async (textId, text) => {
     try{
         const response = await axios.post(apiUrl + '/texts/text-to-speech', {text})
         console.log('Text to speech success')
-        return response.data
+        return response.data.audioContent
 
     }
     catch(error){
