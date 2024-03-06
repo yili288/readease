@@ -8,16 +8,6 @@ import HomePage from './HomePage';
 import getTextTitleAndContent from '../utils/getTextTitleAndContent'
 
 const OriginalText = ({ route, navigation }): JSX.Element => {
-  const { text } = route.params;
-
-  const textToAudio = async () => {
-    // send file text to server
-    const response = await textToSpeech ("Hello, This is a hardcoded test.")
-    if (response != null){
-      saveAudioFile(response)
-    }
-    saveAudioFile(response)
-  }
 
   // todo: get text id from text id list
   const textId = 1;
@@ -35,15 +25,14 @@ const OriginalText = ({ route, navigation }): JSX.Element => {
   }
   
   const displayText = async() => {
-    if (text) {
-      setTitle(text.name);
-      setContent(text.content);
-    } else {
-      const data = await getTextTitleAndContent(textId)
-      const textJson = {'title': data.name, 'content': data.content, 'audio_file_id':"1"}
-      setTitle(textJson.title);
-      setContent(textJson.content);
-    }     
+    const data = await getTextTitleAndContent(textId)
+    const textJson = {
+      'title': data.name,
+      'content': data.content,
+      'audio_file_id':"1"
+    }
+    setTitle(textJson.title);
+    setContent(textJson.content);
   }
 
   return (
