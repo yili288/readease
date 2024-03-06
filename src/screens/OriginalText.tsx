@@ -8,6 +8,7 @@ import HomePage from './HomePage';
 import getTextTitleAndContent from '../utils/getTextTitleAndContent'
 
 const OriginalText = ({ route, navigation }): JSX.Element => {
+  const { text } = route.params;
 
   // todo: get text id from text id list
   const textId = 1;
@@ -25,14 +26,19 @@ const OriginalText = ({ route, navigation }): JSX.Element => {
   }
   
   const displayText = async() => {
-    const data = await getTextTitleAndContent(textId)
-    const textJson = {
-      'title': data.name,
-      'content': data.content,
-      'audio_file_id':"1"
+    if (text) {
+      setTitle(text.name);
+      setContent(text.content);
+    } else {
+      const data = await getTextTitleAndContent(textId)
+      const textJson = {
+        'title': data.name,
+        'content': data.content,
+        'audio_file_id':"1"
+      }
+      setTitle(textJson.title);
+      setContent(textJson.content);
     }
-    setTitle(textJson.title);
-    setContent(textJson.content);
   }
 
   return (
