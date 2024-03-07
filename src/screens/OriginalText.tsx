@@ -150,12 +150,7 @@ const OriginalText = ({ route, navigation }): JSX.Element => {
   }
 
   const displayText = async() => {
-    const data = await getTextTitleAndContent(textId)
-    const textJson = {
-      'title': data.name,
-      'content': data.content,
-      'audio_file_id':"1"
-    }
+    const textJson = await getTextTitleAndContent(textId)
     setTitle(textJson.title);
     setContent(textJson.content);
   }
@@ -231,7 +226,6 @@ const OriginalText = ({ route, navigation }): JSX.Element => {
             onPress={() =>
               navigation.navigate('AudioScreen', {
                 textId,
-                text: content,
               })
             }>
             <Image
