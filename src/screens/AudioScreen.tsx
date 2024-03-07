@@ -12,8 +12,6 @@ import { textToSpeech } from '../utils/textToSpeech';
 Sound.setCategory('Playback');
 
 const AudioScreen = ({ route, navigation }): JSX.Element => {
-  const { textId, text } = route.params;
-
   //TODO: Dynamically load the image and text
   const playerImageURL =
     'https://cdn.discordapp.com/attachments/837783679810928671/1177453309150384198/image.png?ex=65728fd8&is=65601ad8&hm=fe9299e0e4c886bc973d482ab7a766ccab7eb4d98db319cb992e82b10b22a25a&'
