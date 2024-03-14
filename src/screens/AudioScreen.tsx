@@ -8,15 +8,16 @@ import Sound from 'react-native-sound';
 import { StyleSheet } from 'react-native'
 import saveAudioFile from '../utils/saveAudioFile';
 import { textToSpeech } from '../utils/textToSpeech';
+import getTextTitleAndContent from '../utils/getTextTitleAndContent';
 
 Sound.setCategory('Playback');
 
 const AudioScreen = ({ route, navigation }): JSX.Element => {
-  //TODO: Dynamically load the image and text
-  const playerImageURL =
-    'https://cdn.discordapp.com/attachments/837783679810928671/1177453309150384198/image.png?ex=65728fd8&is=65601ad8&hm=fe9299e0e4c886bc973d482ab7a766ccab7eb4d98db319cb992e82b10b22a25a&'
-  const playerText = 'Neoclassicism And Early Romanticism In Britain'
+  const { textId } = route.params;
 
+  //TODO: Dynamically load the image
+  const playerImageURL = "https://readease.s3.amazonaws.com/textThumbnail.png";
+  const [title, setTitle] = useState('');
   const [audio, setAudio] = useState(new Sound("")); //initialised to the sound object
   const [isPlaying, setIsPlaying] = useState(false);  //initialised to false
   const [percentComplete, setPercentComplete] = useState(0);
@@ -33,16 +34,18 @@ const AudioScreen = ({ route, navigation }): JSX.Element => {
   // }
 
   useEffect(() => {
-    const convertAndSaveFile = async (textId, text) => {
+    const convertAndSaveFile = async (textId) => {
+      const textJson = await getTextTitleAndContent(textId)
+      setTitle(textJson.title);
       // send text to server
-      const response = await textToSpeech(textId, text)
+      const response = await textToSpeech(textId, textJson.content)
       if (response != null){
         saveAudioFile(textId, response)
         loadAudio(textId);
       }
     }
-    convertAndSaveFile(textId, text);
-  }, [text, textId])
+    convertAndSaveFile(textId);
+  }, [])
 
   const loadAudio = (textId) => {
     let audio = new Sound(`${textId}.wav`, RNFS.DocumentDirectoryPath, (error) => {
@@ -133,7 +136,7 @@ const AudioScreen = ({ route, navigation }): JSX.Element => {
       </View>
       <View style={styles.background}>
         <View style={styles.navContainer}>
-          <TouchableOpacity onPress={() => navigation.navigate('OriginalText')}>
+          <TouchableOpacity onPress={() => navigation.navigate('OriginalText', {})}>
             <Image
               source={require('../assets/backArrow.png')}
               style={styles.buttonStyle}
@@ -142,7 +145,7 @@ const AudioScreen = ({ route, navigation }): JSX.Element => {
         </View>
         <View style={styles.audioDetailContainer}>
           <Image source={{uri: playerImageURL}} style={styles.playerImageStyle} />
-          <Text style={styles.audioTitleStyle}>{playerText}</Text>
+          <Text style={styles.audioTitleStyle}>{title}</Text>
         </View>
         <View style={styles.audioPlayerContainer}>
           <Slider

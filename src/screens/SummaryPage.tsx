@@ -1,21 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, useWindowDimensions, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, useWindowDimensions, Text, StyleSheet, ScrollView, Image, Dimensions } from 'react-native';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
+import Carousel from 'react-native-reanimated-carousel';
 import getTextSummary from '../utils/getTextSummary'
+import getPictureSummary from '../utils/getPictureSummary';
 
 const KeywordsTab = () => {
   return <View style={{flex: 1, backgroundColor: '#9BD3DD'}}></View>
-}
-
-const PointsTab = ({title, summary}) => {
-  return (
-    <ScrollView>
-      <Text style={styles.titleText}>{title}</Text>
-      {
-        summary ? <Text style={styles.baseText}>{summary}{'\n\n'}</Text>: <Text style={styles.baseText}>Loading...</Text>
-      }
-    </ScrollView>
-  )
 }
 
 const SummaryPage = ({textId, title, content}): JSX.Element => {
@@ -29,13 +20,19 @@ const SummaryPage = ({textId, title, content}): JSX.Element => {
   ]);
 
   const [summaryBulletPoints, setSummaryBulletPoints] = useState("");
+  const [summaryPictureUrls, setSummaryPictureUrls] = useState([]);
 
   useEffect(() => {
     getTextSummary(textId, content).then((result) => {
       if (result) {
         setSummaryBulletPoints(result);
       }
-    })
+    });
+    getPictureSummary(textId).then((result) => {
+      if (result) {
+        setSummaryPictureUrls(result);
+      }
+    });
   }, [content]);
 
   // render Tab content
@@ -43,7 +40,32 @@ const SummaryPage = ({textId, title, content}): JSX.Element => {
     if (route.key == 'keywords') {
       return <KeywordsTab/>;
     }else if (route.key == 'points') {
-      return <PointsTab title={title} summary={summaryBulletPoints}/>;
+      return (
+        <ScrollView>
+          <Carousel
+            width={400}
+            height={400}
+            autoPlay={true}
+            autoPlayInterval={5000}
+            data={summaryPictureUrls}
+            scrollAnimationDuration={1000}
+            renderItem={({ item, index }) => (
+                <View key={index}>
+                  <Image 
+                    source={{ uri: summaryPictureUrls[index]}}
+                    style={{width: 400, height: 400}} 
+                  />
+                </View>
+            )}
+          />
+          <Text style={styles.titleText}>{title}</Text>
+          {
+            summaryBulletPoints ? 
+            <Text style={styles.baseText}>{summaryBulletPoints}</Text>
+            : <Text style={styles.baseText}>Loading...</Text>
+          }
+        </ScrollView>
+      );
     }
   }
 
