@@ -1,3 +1,3 @@
-const apiUrl = 'http://localhost:3000';
+const apiUrl = 'https://readease-e3g2k.ondigitalocean.app';
 
 export { apiUrl };
