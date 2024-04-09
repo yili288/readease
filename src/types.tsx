@@ -8,4 +8,5 @@ export type TextDocument = {
   summary: string;
   summary_media: string[];
   audio_file_id: string;
+  thumbnail: string;
 }

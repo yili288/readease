@@ -53,7 +53,12 @@ const HomePage = ({ navigation }): JSX.Element => {
                                 testID='originalText'
                                 onPress={() => navigation.navigate('OriginalText', {textId: document.text_id})}>
                                 <View style={styles.shadow}>
-                                    <Image style={styles.documentThumbnail} source={require('../assets/textThumbnail.png')} />
+                                    {
+                                    document.thumbnail ?
+                                        <Image style={styles.documentThumbnail} source={{ uri: document.thumbnail}} />
+                                        :
+                                        <></>
+                                    }
                                 </View>
                                 <Text style={styles.documentTitleText}>{document.name}</Text>
                             </TouchableOpacity>
@@ -115,7 +120,7 @@ var styles = StyleSheet.create({
     homePageContainer: {
         padding: 10,
         height: '100%',
-        backgroundColor : "#ffffff",
+        backgroundColor : "#ff  ffff",
     },
     topRowContainer: {
         flexDirection: 'row',
