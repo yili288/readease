@@ -20,7 +20,6 @@ import Sound from 'react-native-sound'
 
 
 const OriginalText = ({ route, navigation }): JSX.Element => {
-  const { text } = route.params;
 
   const { textId } = route.params;
   const [title, setTitle] = useState('')
@@ -150,19 +149,9 @@ const OriginalText = ({ route, navigation }): JSX.Element => {
   }
 
   const displayText = async() => {
-    if (text) {
-      setTitle(text.name);
-      setContent(text.content);
-    } else {
-      const data = await getTextTitleAndContent(textId)
-      const textJson = {
-        'title': data.name,
-        'content': data.content,
-        'audio_file_id':"1"
-      }
-      setTitle(textJson.title);
-      setContent(textJson.content);
-    }
+    const textJson = await getTextTitleAndContent(textId)
+    setTitle(textJson.title);
+    setContent(textJson.content);
   }
 
   return (
@@ -236,7 +225,6 @@ const OriginalText = ({ route, navigation }): JSX.Element => {
             onPress={() =>
               navigation.navigate('AudioScreen', {
                 textId,
-                text: content,
               })
             }>
             <Image
