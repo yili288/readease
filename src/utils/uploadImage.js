@@ -19,7 +19,8 @@ const uploadImage = async (imageUri) => {
       throw new Error('Error uploading image');
     }
     const text = response.data.textFound;
-    return text;
+    const textId = responda.data.textId;
+    return {text, textId};
   }
   catch (error) {
     console.error('Error uploading image', error);

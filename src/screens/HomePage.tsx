@@ -3,20 +3,32 @@ import { Image, Text, TouchableOpacity, View, StyleSheet, ScrollView, SafeAreaVi
 import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
 import uploadImage from '../utils/uploadImage';
 import handleImportFiles from '../utils/handleImportFiles';
+import getAllTexts from '../utils/getAllText';
+import { TextDocument } from '../types';
 
 const HomePage = ({ navigation }): JSX.Element => {
     const [uploadModalVisible, setUploadModalVisible] = useState(false);
+    const [documents, setDocuments] = useState<TextDocument[]>([])
     
     const onUploadButtonPressed = () => {
         launchImageLibrary({mediaType: 'photo'}, async (response) => {
             if (response.assets !== undefined && response.assets.length > 0) {
-                let textExtracted = "";
-                textExtracted = await uploadImage(response.assets[0].uri);
+                let { text, textId } = await uploadImage(response.assets[0].uri);
                 setUploadModalVisible(false);
-                navigation.navigate('OriginalText', {text: textExtracted});
+                navigation.navigate('OriginalText', {text, textId});
             }
         });
     }
+    
+    useEffect(() => {
+        async function getDocuments() {
+            const texts = await getAllTexts();
+            setDocuments(texts);
+        };
+        if (documents.length == 0) {
+            getDocuments();
+        }
+    }, []);
                             
     return(
         <SafeAreaView style={styles.safeAreacontainer}>
@@ -33,12 +45,26 @@ const HomePage = ({ navigation }): JSX.Element => {
                     </TouchableOpacity>
                 </View>
                 <ScrollView>
-                    <TouchableOpacity 
-                        testID='originalText'
-                        onPress={() => navigation.navigate('OriginalText', {})}>
-                        <Image style={styles.documentThumbnail} source={require('../assets/textThumbnail.png')} />
-                        <Text style={styles.documentTitleText}>Neoclassicism and Early...</Text>
-                    </TouchableOpacity>
+                    <View style={styles.documentsContainer}>
+                    {
+                        documents.map((document) => (
+                            <TouchableOpacity 
+                                key={document.text_id}
+                                testID='originalText'
+                                onPress={() => navigation.navigate('OriginalText', {textId: document.text_id})}>
+                                <View style={styles.shadow}>
+                                    {
+                                    document.thumbnail ?
+                                        <Image style={styles.documentThumbnail} source={{ uri: document.thumbnail}} />
+                                        :
+                                        <></>
+                                    }
+                                </View>
+                                <Text style={styles.documentTitleText}>{document.name}</Text>
+                            </TouchableOpacity>
+                        ))
+                    }
+                    </View>
                 </ScrollView>
                 <Modal 
                     transparent={true} 
@@ -94,6 +120,7 @@ var styles = StyleSheet.create({
     homePageContainer: {
         padding: 10,
         height: '100%',
+        backgroundColor : "#ff  ffff",
     },
     topRowContainer: {
         flexDirection: 'row',
@@ -105,15 +132,31 @@ var styles = StyleSheet.create({
         color: '#000000',
         paddingLeft: 10,
     },
+    documentsContainer: {
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
     documentTitleText: {
+        width: 300,
         fontSize: 17,
         fontFamily: 'Inter-Black',
         color: '#000000',
-        paddingHorizontal: 10
+        marginBottom: 25,
+    },
+    shadow: {
+        borderRadius: 15,
+        backgroundColor : "#ffffff",
+        shadowColor: '#000000',
+        shadowOffset: {width: 5, height: 5},
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
+        elevation: 5,  // for android
+        marginBottom: 10
     },
     documentThumbnail: {
-        width: 216,
-        height: 191,
+        width: 300,
+        height: 300,
+        borderRadius: 15,
     },
     uploadButton: {
         position: 'absolute',

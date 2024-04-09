@@ -15,7 +15,7 @@ const getTextSummary = (textId, text, forceRegenerate=false) => {
   })
   .then(response => {
     if (!response.ok) {
-      throw new Error('Error fetching data');
+      throw new Error('Error fetching summary');
     }
     return response.json()
   }).then(data => {

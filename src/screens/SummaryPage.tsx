@@ -42,22 +42,26 @@ const SummaryPage = ({textId, title, content}): JSX.Element => {
     }else if (route.key == 'points') {
       return (
         <ScrollView>
-          <Carousel
-            width={400}
-            height={400}
-            autoPlay={true}
-            autoPlayInterval={5000}
-            data={summaryPictureUrls}
-            scrollAnimationDuration={1000}
-            renderItem={({ item, index }) => (
-                <View key={index}>
-                  <Image 
-                    source={{ uri: summaryPictureUrls[index]}}
-                    style={{width: 400, height: 400}} 
-                  />
-                </View>
-            )}
-          />
+          {
+            summaryPictureUrls.length != 0 ?
+            <Carousel
+              width={400}
+              height={400}
+              autoPlay={true}
+              autoPlayInterval={5000}
+              data={summaryPictureUrls}
+              scrollAnimationDuration={1000}
+              renderItem={({ item, index }) => (
+                  <View key={index}>
+                    <Image 
+                      source={{ uri: summaryPictureUrls[index]}}
+                      style={{width: 400, height: 400}} 
+                    />
+                  </View>
+              )}
+            />
+            : <Text style={styles.baseText}>Loading...</Text>
+          }
           <Text style={styles.titleText}>{title}</Text>
           {
             summaryBulletPoints ? 
