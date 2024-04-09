@@ -9,7 +9,6 @@ const AudioScreenMock = (
     route={{
       params: {
         textId: 1,
-        text: "",
       },
     }}
     navigation={{
