@@ -22,8 +22,7 @@ import Sound from 'react-native-sound'
 const OriginalText = ({ route, navigation }): JSX.Element => {
   const { text } = route.params;
 
-  // todo: get text id from text id list
-  const textId = 1
+  const { textId } = route.params;
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [pageSelect, setPageSelect] = useState<pageSelect>('original') // limits the data type

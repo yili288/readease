@@ -133,7 +133,7 @@ const AudioScreen = ({ route, navigation }): JSX.Element => {
       </View>
       <View style={styles.background}>
         <View style={styles.navContainer}>
-          <TouchableOpacity onPress={() => navigation.navigate('OriginalText')}>
+          <TouchableOpacity onPress={() => navigation.navigate('OriginalText', {textId})}>
             <Image
               source={require('../assets/backArrow.png')}
               style={styles.buttonStyle}
