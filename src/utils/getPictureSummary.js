@@ -8,7 +8,7 @@ const getPictureSummary = async (textId, forceRegenerate = false) => {
       forceRegenerate,
     });
     if (!response.status) {
-      throw new Error('Error fetching data');
+      throw new Error('Error fetching image');
     }
     return response.data.pictureUrls;
   }
