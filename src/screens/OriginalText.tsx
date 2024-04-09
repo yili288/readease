@@ -169,7 +169,7 @@ const OriginalText = ({ route, navigation }): JSX.Element => {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.topBarExitButtonContainer}
-              onPress={() => {}}>
+              onPress={() => navigation.navigate('HomePage')}>
               <Text style={styles.saveButtonText}>Save</Text>
             </TouchableOpacity>
           </View>

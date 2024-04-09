@@ -45,17 +45,21 @@ const HomePage = ({ navigation }): JSX.Element => {
                     </TouchableOpacity>
                 </View>
                 <ScrollView>
-                {
-                    documents.map((document) => (
-                        <TouchableOpacity 
-                            key={document.text_id}
-                            testID='originalText'
-                            onPress={() => navigation.navigate('OriginalText', {textId: document.text_id})}>
-                            <Image style={styles.documentThumbnail} source={require('../assets/textThumbnail.png')} />
-                            <Text style={styles.documentTitleText}>{document.name}</Text>
-                        </TouchableOpacity>
-                    ))
-                }
+                    <View style={styles.documentsContainer}>
+                    {
+                        documents.map((document) => (
+                            <TouchableOpacity 
+                                key={document.text_id}
+                                testID='originalText'
+                                onPress={() => navigation.navigate('OriginalText', {textId: document.text_id})}>
+                                <View style={styles.shadow}>
+                                    <Image style={styles.documentThumbnail} source={require('../assets/textThumbnail.png')} />
+                                </View>
+                                <Text style={styles.documentTitleText}>{document.name}</Text>
+                            </TouchableOpacity>
+                        ))
+                    }
+                    </View>
                 </ScrollView>
                 <Modal 
                     transparent={true} 
@@ -111,6 +115,7 @@ var styles = StyleSheet.create({
     homePageContainer: {
         padding: 10,
         height: '100%',
+        backgroundColor : "#ffffff",
     },
     topRowContainer: {
         flexDirection: 'row',
@@ -122,15 +127,31 @@ var styles = StyleSheet.create({
         color: '#000000',
         paddingLeft: 10,
     },
+    documentsContainer: {
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
     documentTitleText: {
+        width: 300,
         fontSize: 17,
         fontFamily: 'Inter-Black',
         color: '#000000',
-        paddingHorizontal: 10
+        marginBottom: 25,
+    },
+    shadow: {
+        borderRadius: 15,
+        backgroundColor : "#ffffff",
+        shadowColor: '#000000',
+        shadowOffset: {width: 5, height: 5},
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
+        elevation: 5,  // for android
+        marginBottom: 10
     },
     documentThumbnail: {
-        width: 216,
-        height: 191,
+        width: 300,
+        height: 300,
+        borderRadius: 15,
     },
     uploadButton: {
         position: 'absolute',

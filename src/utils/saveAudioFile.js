@@ -8,7 +8,7 @@ const saveAudioFile = (textId, response) => {
   // decode base 64 and save as audio file
   RNFS.writeFile(path, response.encodedAudio, 'base64') 
     .then((success) => {
-      console.log('FILE WRITTEN!');
+      console.log('Audio file saved');
     })
     .catch((err) => {
       console.error('Error saving file:', err.message);
